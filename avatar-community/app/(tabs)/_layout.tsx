@@ -1,24 +1,31 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { colors } from "@/constants";
+import { Tabs } from "expo-router";
+import React from "react";
 
 export default function TabLayout() {
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "black",
+        tabBarActiveTintColor: colors.ORANGE_600,
         headerShown: false,
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: "Home",
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="my"
         options={{
-          title: 'Explore',
+          title: "Profile",
+        }}
+      />
+      <Tabs.Screen
+        name="setting"
+        options={{
+          title: "Settings",
         }}
       />
     </Tabs>

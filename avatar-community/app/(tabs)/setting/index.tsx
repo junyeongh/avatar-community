@@ -2,12 +2,12 @@ import { Text } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 
-export default function HomeScreen() {
+export default function SettingScreen() {
 
   return (
     <SafeAreaProvider>
       <SafeAreaView>
-          <Text>Home screen</Text>
+          <Text>My setting screen</Text>
       </SafeAreaView>
     </SafeAreaProvider>
   );
