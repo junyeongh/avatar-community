@@ -9,7 +9,7 @@ const test_data = [
     title: "test title",
     description:
       "Cupidatat fugiat ea laboris incididunt eiusmod ullamco et Lorem occaecat est. Enim laborum cillum amet ea elit sunt ullamco ea non laboris. Fugiat voluptate anim laborum cupidatat quis. Sunt sunt esse anim cupidatat fugiat. Sit exercitation laboris irure aliquip consectetur eu sit. Ad consectetur elit irure commodo commodo dolor do incididunt commodo sint enim nisi labore reprehenderit. Occaecat commodo cupidatat aliqua esse adipisicing adipisicing aute adipisicing culpa velit non exercitation cupidatat laboris.",
-    createdAt: "test createdAt",
+    createdAt: "2025-09-19",
     author: {
       id: 1,
       nickname: "this",
@@ -28,7 +28,7 @@ const test_data = [
     title: "test title 2",
     description:
       "Cupidatat fugiat ea laboris incididunt eiusmod ullamco et Lorem occaecat est. Enim laborum cillum amet ea elit sunt ullamco ea non laboris. Fugiat voluptate anim laborum cupidatat quis. Sunt sunt esse anim cupidatat fugiat. Sit exercitation laboris irure aliquip consectetur eu sit. Ad consectetur elit irure commodo commodo dolor do incididunt commodo sint enim nisi labore reprehenderit. Occaecat commodo cupidatat aliqua esse adipisicing adipisicing aute adipisicing culpa velit non exercitation cupidatat laboris.",
-    createdAt: "test createdAt",
+    createdAt: "2025-09-19",
     author: {
       id: 1,
       nickname: "this",

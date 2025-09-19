@@ -2,6 +2,7 @@ import { colors } from "@/constants";
 import { Post } from "@/types";
 import { Ionicons, Octicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import Profile from "./Profile";
 
 interface FeedItemProps {
   post: Post;
@@ -13,6 +14,12 @@ export default function FeedItem({ post, ...props }: FeedItemProps) {
   return (
     <View style={[styles.container]}>
       <View style={[styles.contenContainer]}>
+        <Profile
+          onPress={() => {}}
+          imageUri={post.author.imageUri}
+          nickname={post.author.nickname}
+          createdAt={post.createdAt}
+        />
         <Text style={styles.title}>{post.title}</Text>
         <Text numberOfLines={3} style={styles.description}>
           {post.description}
