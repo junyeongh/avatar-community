@@ -23,6 +23,13 @@ export default function AuthLayout() {
           ),
         }}
       />
+      <Stack.Screen
+        name="login"
+        options={{
+          title: "Sign in with E-mail",
+          headerShown: true,
+        }}
+      />
     </Stack>
   );
 }

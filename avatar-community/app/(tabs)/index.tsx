@@ -7,7 +7,12 @@ export default function HomeScreen() {
   return (
     <SafeAreaView>
       <Text>Home screen</Text>
-      <Button label="Button" onPress={()=>{router.push('/auth')}} />
+      <Button
+        label="Button"
+        onPress={() => {
+          router.push("/auth");
+        }}
+      />
     </SafeAreaView>
   );
 }

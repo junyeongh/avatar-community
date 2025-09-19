@@ -1,5 +1,5 @@
 import Button from "@/components/CustomButton";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { Image, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -13,7 +13,10 @@ export default function AuthHome() {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <Button label="Sign in with E-mail" />
+        <Button
+          label="Sign in with E-mail"
+          onPress={() => router.push("/auth/login")}
+        />
         <Link href={"/"} style={styles.signUpText}>
           Sign up with E-mail
         </Link>
