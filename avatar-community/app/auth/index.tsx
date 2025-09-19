@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AuthHome() {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['right', 'bottom', 'left']}>
       <View style={styles.imageContainer}>
         <Image
           source={require("@/assets/images/logo.png")}
@@ -27,17 +27,14 @@ export default function AuthHome() {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "blue",
     flex: 1,
   },
   imageContainer: {
-    // backgroundColor: "red",
     flex: 2,
     justifyContent: "center",
     alignItems: "center",
   },
   buttonContainer: {
-    // backgroundColor: "yellow",
     flex: 1,
     paddingHorizontal: 32,
   },
