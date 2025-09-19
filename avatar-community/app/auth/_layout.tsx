@@ -24,10 +24,19 @@ export default function AuthLayout() {
         }}
       />
       <Stack.Screen
-        name="login"
+        name="signin"
         options={{
           title: "Sign in with E-mail",
           headerShown: true,
+          headerBackButtonDisplayMode: "minimal",
+        }}
+      />
+      <Stack.Screen
+        name="signup"
+        options={{
+          title: "Sign up with E-mail",
+          headerShown: true,
+          headerBackButtonDisplayMode: "minimal",
         }}
       />
     </Stack>

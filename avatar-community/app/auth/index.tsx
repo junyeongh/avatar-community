@@ -15,9 +15,9 @@ export default function AuthHome() {
       <View style={styles.buttonContainer}>
         <Button
           label="Sign in with E-mail"
-          onPress={() => router.push("/auth/login")}
+          onPress={() => router.push("/auth/signin")}
         />
-        <Link href={"/"} style={styles.signUpText}>
+        <Link href={"/auth/signup"} style={styles.signUpText}>
           Sign up with E-mail
         </Link>
       </View>

@@ -1,7 +1,7 @@
 import { colors } from "@/constants";
 import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
 
-interface CustomButtonPrps extends PressableProps {
+interface CustomButtonProps extends PressableProps {
   label: string;
   size?: "large" | "medium";
   variant?: "filled";
@@ -12,7 +12,7 @@ export default function Button({
   size = "large",
   variant = "filled",
   ...props
-}: CustomButtonPrps) {
+}: CustomButtonProps) {
   return (
     <Pressable
       style={({ pressed }) => [
