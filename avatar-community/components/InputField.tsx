@@ -1,4 +1,5 @@
 import { colors } from "@/constants";
+import { Ref } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,12 +12,14 @@ interface InputFieldProps extends TextInputProps {
   label?: string;
   variant?: "filled" | "standard" | "outlined";
   error?: string;
+  ref?: Ref<TextInput>;
 }
 
 export default function InputField({
   label,
   variant = "filled",
   error = "",
+  ref,
   ...props
 }: InputFieldProps) {
   return (
@@ -26,8 +29,12 @@ export default function InputField({
         style={[styles.container, styles[variant], error && styles.inputError]}
       >
         <TextInput
+          ref={ref}
           placeholderTextColor={colors.GRAY_500}
           style={styles.input}
+          autoCapitalize="none"
+          spellCheck={false}
+          autoCorrect={false}
           {...props}
         />
       </View>

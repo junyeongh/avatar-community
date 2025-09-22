@@ -44,7 +44,7 @@ export default function SignUpScreen() {
     <FormProvider {...signUpForm}>
       <View style={styles.container}>
         <EmailInput />
-        <PasswordInput />
+        <PasswordInput submitBehavior="submit" returnKeyType="next" />
         <PasswordConfirmInput />
       </View>
       <FixedBottomCTA

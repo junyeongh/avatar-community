@@ -11,12 +11,14 @@ export default function PasswordConfirmInput() {
       name="passwordConfirm"
       control={control}
       rules={{ required: true }}
-      render={({ field: { value, onChange }, fieldState: { error } }) => (
+      render={({ field: { ref, value, onChange }, fieldState: { error } }) => (
         <>
           <InputField
+            ref={ref}
             label="Confirm password"
             placeholder="Please confirm your password."
-            // secureTextEntry={shouldHidePassword}
+            secureTextEntry={shouldHidePassword}
+            textContentType="password"
             value={value}
             onChangeText={onChange}
             error={error?.message}
