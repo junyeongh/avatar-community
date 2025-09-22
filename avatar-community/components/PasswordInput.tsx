@@ -10,13 +10,15 @@ export default function PasswordInput() {
     <Controller
       name="password"
       control={control}
-      render={({ field: { value, onChange } }) => (
+      rules={{ required: true }}
+      render={({ field: { value, onChange }, fieldState: { error } }) => (
         <InputField
           label="Password"
           placeholder="Please input your password."
-          // secureTextEntry={true}
+          // secureTextEntry={shouldHidePassword}
           value={value}
           onChangeText={onChange}
+          error={error?.message}
         />
       )}
     />

@@ -8,13 +8,15 @@ export default function EmailInput() {
     <Controller
       name="email"
       control={control}
-      render={({ field: { value, onChange } }) => (
+      rules={{ required: true }}
+      render={({ field: { value, onChange }, fieldState: { error } }) => (
         <InputField
           label="E-mail"
           placeholder="Please input your email."
           inputMode="email"
           value={value}
           onChangeText={onChange}
+          error={error?.message}
         />
       )}
     />

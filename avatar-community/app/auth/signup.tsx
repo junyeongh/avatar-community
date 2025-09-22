@@ -2,8 +2,10 @@ import EmailInput from "@/components/EmailInput";
 import FixedBottomCTA from "@/components/FixedBottomCTA";
 import PasswordConfirmInput from "@/components/PasswordConfirmInput";
 import PasswordInput from "@/components/PasswordInput";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
+import { z } from "zod";
 
 interface FormValues {
   email: string;
@@ -11,8 +13,22 @@ interface FormValues {
   passwordConfirm: string;
 }
 
+const schema = z
+  .object({
+    email: z.email("Please enter a valid email address"),
+    password: z.string().min(8, "Password must be at least 8 characters long"),
+    passwordConfirm: z
+      .string()
+      .min(8, "Password must be at least 8 characters long"),
+  })
+  .refine((data) => data.password === data.passwordConfirm, {
+    message: "Passwords don't match",
+    path: ["passwordConfirm"],
+  });
+
 export default function SignUpScreen() {
   const signUpForm = useForm<FormValues>({
+    resolver: zodResolver(schema),
     defaultValues: {
       email: "",
       password: "",
