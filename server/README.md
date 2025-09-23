@@ -29,7 +29,16 @@ JWT_SECRET=SecretCommunity
 JWT_ACCESS_TOKEN_EXPIRATION=30m
 ```
 
-3. 개발 환경 실행
+- General
+  - > Name: `PostgreSQL` (임의 지정 가능)
+- Connection
+  - > Host name/address: `postgres` (docker-compose.yml의 서비스 이름)
+  - > Port: `5432`
+  - > Maintenance database: `[DB_DATABASE 값]`
+  - > Username: `[DB_USERNAME 값]`
+  - > Password: `[DB_PASSWORD 값]`
+
+1. 개발 환경 실행
 
 ```
 npm run start:dev
