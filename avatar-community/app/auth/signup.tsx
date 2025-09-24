@@ -8,12 +8,6 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
 import { z } from "zod";
 
-interface FormValues {
-  email: string;
-  password: string;
-  passwordConfirm: string;
-}
-
 const schema = z
   .object({
     email: z.email("Please enter a valid email address"),
@@ -25,10 +19,18 @@ const schema = z
     path: ["passwordConfirm"],
   });
 
+// interface SignupFormValues {
+//   email: string;
+//   password: string;
+//   passwordConfirm: string;
+// }
+
+type SignupFormValues = z.infer<typeof schema>;
+
 export default function SignUpScreen() {
   const { signupMutation } = useAuth();
 
-  const signUpForm = useForm<FormValues>({
+  const signUpForm = useForm<SignupFormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       email: "",
@@ -37,7 +39,7 @@ export default function SignUpScreen() {
     },
   });
 
-  const onSubmit: SubmitHandler<FormValues> = (formValues) => {
+  const onSubmit: SubmitHandler<SignupFormValues> = (formValues) => {
     console.log("formValues", formValues);
     const { email, password } = formValues;
     signupMutation.mutate({ email, password });
