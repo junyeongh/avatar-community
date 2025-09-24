@@ -7,11 +7,9 @@ type UserRequestBody = {
   password: string;
 };
 
-const apiUri = "http://localhost:3030";
-
 export async function postSignup(body: UserRequestBody): Promise<void> {
-  const { data } = await axiosInstance.post(`${apiUri}/auth/signup`, body);
-  // const response = await fetch(`${apiUri}/auth/signup`, {
+  const { data } = await axiosInstance.post("/auth/signup", body);
+  // const response = await fetch("/auth/signup", {
   //   method: "POST",
   //   headers: {
   //     "Content-Type": "application/json",
@@ -29,14 +27,14 @@ export async function postSignup(body: UserRequestBody): Promise<void> {
 }
 
 export async function postSignin(body: UserRequestBody): Promise<{ accessToken: string }> {
-  const { data } = await axiosInstance.post(`${apiUri}/auth/signin`, body);
+  const { data } = await axiosInstance.post("/auth/signin", body);
 
   return data;
 }
 
 export async function getMe(): Promise<Profile> {
   const accessToken = await getSecureStore("accessToken");
-  const { data } = await axiosInstance.get(`${apiUri}/auth/me`, {
+  const { data } = await axiosInstance.get("/auth/me", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
