@@ -1,6 +1,6 @@
+import { Profile } from "@/types";
 import { getSecureStore } from "@/utils/secureStore";
 import { axiosInstance } from "./axios";
-import { Profile } from "@/types";
 
 type UserRequestBody = {
   email: string;

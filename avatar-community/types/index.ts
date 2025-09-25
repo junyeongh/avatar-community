@@ -92,6 +92,5 @@ export type {
   PostVote,
   PostVoteOption,
   Profile,
-  VoteOption
+  VoteOption,
 };
-

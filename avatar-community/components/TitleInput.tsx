@@ -8,7 +8,7 @@ export default function TitleInput({}: TitleInputProps) {
 
   return (
     <Controller
-      name="email"
+      name="title"
       control={control}
       rules={{ required: true }}
       render={({ field: { value, onChange }, fieldState: { error } }) => (

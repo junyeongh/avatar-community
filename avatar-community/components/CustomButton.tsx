@@ -4,15 +4,10 @@ import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
 interface CustomButtonProps extends PressableProps {
   label: string;
   size?: "large" | "medium";
-  variant?: "filled";
+  variant?: "standard" | "filled";
 }
 
-export default function Button({
-  label,
-  size = "large",
-  variant = "filled",
-  ...props
-}: CustomButtonProps) {
+export default function Button({ label, size = "large", variant = "filled", ...props }: CustomButtonProps) {
   return (
     <Pressable
       style={({ pressed }) => [
@@ -23,9 +18,7 @@ export default function Button({
       ]}
       {...props}
     >
-      <Text style={[styles.text, { color: styles[variant].color }]}>
-        {label}
-      </Text>
+      <Text style={[styles.text, { color: styles[variant].color }]}>{label}</Text>
     </Pressable>
   );
 }
@@ -47,6 +40,10 @@ const styles = StyleSheet.create({
   },
   medium: {},
   // variant
+  standard: {
+    backgroundColor: undefined,
+    color: colors.ORANGE_600,
+  },
   filled: {
     backgroundColor: colors.ORANGE_600,
     color: colors.WHITE,

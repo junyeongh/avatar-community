@@ -15,7 +15,7 @@ export default function PostLayout() {
       <Stack.Screen
         name="write"
         options={{
-          title: "Add post",
+          title: "Write a post",
           headerShown: true,
           headerLeft: () => (
             <Link href={"/"} replace style={{ paddingRight: 12 }}>
