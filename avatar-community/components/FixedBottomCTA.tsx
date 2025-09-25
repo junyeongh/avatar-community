@@ -13,11 +13,13 @@ export default function FixedBottomCTA({
   label,
   onPress,
 }: FixedBottomCTAProps) {
-  const inset = useSafeAreaInsets();
+  const insets = useSafeAreaInsets();
 
   return (
     <>
-      <View style={[styles.fixed, { paddingBottom: inset.bottom || 12 }]}>
+      <View
+        style={[styles.fixed, { paddingBottom: Math.max(insets.bottom, 12) }]}
+      >
         <Button label={label} onPress={onPress} />
       </View>
     </>

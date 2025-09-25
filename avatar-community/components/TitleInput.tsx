@@ -13,7 +13,6 @@ export default function TitleInput({}: TitleInputProps) {
       rules={{ required: true }}
       render={({ field: { value, onChange }, fieldState: { error } }) => (
         <InputField
-          autoFocus
           label="Title"
           placeholder="Please input the title."
           submitBehavior="submit"

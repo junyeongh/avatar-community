@@ -14,7 +14,6 @@ export default function DescriptionInput({}: DescriptionInputProps) {
       render={({ field: { ref, value, onChange }, fieldState: { error } }) => (
         <InputField
           ref={ref}
-          autoFocus
           label="Description"
           placeholder="Please description the title."
           returnKeyType="next"

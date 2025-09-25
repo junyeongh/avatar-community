@@ -2,13 +2,13 @@ import Button from "@/components/CustomButton";
 import DescriptionInput from "@/components/DescriptionInput";
 import TitleInput from "@/components/TitleInput";
 import { useCreatePost } from "@/hooks/queries/useCreatePost";
+import useKeyboardOffset from "@/hooks/useKeyboardOffset";
 import { ImageUri } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "expo-router";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Keyboard, StyleSheet, TouchableWithoutFeedback } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
 import z from "zod";
 
 const schema = z.object({
@@ -17,17 +17,12 @@ const schema = z.object({
   imageUris: z.array(z.custom<ImageUri>()),
 });
 
-// interface PostFormValues {
-//   title: string;
-//   description: string;
-//   imageUris: ImageUri;
-// }
-
 type PostFormValues = z.infer<typeof schema>;
 
 export default function PostWriteScreen() {
   const navigation = useNavigation();
   const createPost = useCreatePost();
+  const { isKeyboardShown, keyboardVerticalOffsetValue } = useKeyboardOffset();
 
   const onSubmit = (formValues: PostFormValues) => {
     createPost.mutate(formValues);
@@ -36,7 +31,12 @@ export default function PostWriteScreen() {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button label="Save" size="medium" variant="standard" onPress={postForm.handleSubmit(onSubmit)} />
+        <Button
+          label="Save"
+          size="medium"
+          variant="standard"
+          onPress={postForm.handleSubmit(onSubmit)}
+        />
       ),
     });
   });
@@ -51,23 +51,35 @@ export default function PostWriteScreen() {
   });
 
   return (
-    <KeyboardAwareScrollView contentContainerStyle={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <FormProvider {...postForm}>
+    <FormProvider {...postForm}>
+      <KeyboardAvoidingView
+        behavior="padding"
+        keyboardVerticalOffset={keyboardVerticalOffsetValue}
+        enabled={isKeyboardShown}
+        style={{ flex: 1 }}
+      >
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}
+        >
           <TitleInput />
           <DescriptionInput />
-          {/* <DescriptionInput />
           <DescriptionInput />
-          <DescriptionInput /> */}
-        </FormProvider>
-      </TouchableWithoutFeedback>
-    </KeyboardAwareScrollView>
+          <DescriptionInput />
+          <DescriptionInput />
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </FormProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    margin: 16,
+    flex: 1,
+  },
+  contentContainer: {
+    flexGrow: 1,
+    padding: 16,
     gap: 16,
   },
 });
