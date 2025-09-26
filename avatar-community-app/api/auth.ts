@@ -9,26 +9,11 @@ type UserRequestBody = {
 
 export async function postSignup(body: UserRequestBody): Promise<void> {
   const { data } = await axiosInstance.post("/auth/signup", body);
-  // const response = await fetch("/auth/signup", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(body),
-  // });
-
-  // if (!response.ok) {
-  //   throw new Error(`HTTP error! status: ${response.status}`);
-  // }
-
-  // const data = await response.json();
-
   return data;
 }
 
 export async function postSignin(body: UserRequestBody): Promise<{ accessToken: string }> {
   const { data } = await axiosInstance.post("/auth/signin", body);
-
   return data;
 }
 
