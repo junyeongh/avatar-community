@@ -17,3 +17,12 @@ export const colors = {
   ORANGE_300: "#FFB884",
   ORANGE_600: "#FF6B57",
 };
+
+export const queryKeys = {
+  // Auth
+  AUTH: "auth",
+  GET_ME: "getMe",
+  // Post
+  POST: "post",
+  GET_POSTS: "getPosts",
+};

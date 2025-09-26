@@ -1,7 +1,7 @@
 import Button from "@/components/CustomButton";
 import DescriptionInput from "@/components/DescriptionInput";
 import TitleInput from "@/components/TitleInput";
-import { useCreatePost } from "@/hooks/queries/useCreatePost";
+import { useCreatePost } from "@/hooks/queries/usePost";
 import useKeyboardOffset from "@/hooks/useKeyboardOffset";
 import { ImageUri } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -63,9 +63,6 @@ export default function PostWriteScreen() {
           contentContainerStyle={styles.contentContainer}
         >
           <TitleInput />
-          <DescriptionInput />
-          <DescriptionInput />
-          <DescriptionInput />
           <DescriptionInput />
         </ScrollView>
       </KeyboardAvoidingView>
