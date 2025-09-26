@@ -1,5 +1,4 @@
-// import Button from "@/components/CustomButton";
-import FeedList from "@/components/FeedList";
+import FeedList from "@/components/composite/FeedList";
 import { colors } from "@/constants";
 import { useAuth } from "@/hooks/queries/useAuth";
 import { Ionicons } from "@expo/vector-icons";

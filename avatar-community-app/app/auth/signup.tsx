@@ -1,7 +1,7 @@
-import EmailInput from "@/components/EmailInput";
-import FixedBottomCTA from "@/components/FixedBottomCTA";
-import PasswordConfirmInput from "@/components/PasswordConfirmInput";
-import PasswordInput from "@/components/PasswordInput";
+import FixedBottomCTA from "@/components/composite/FixedBottomCTA";
+import EmailInput from "@/components/forms/EmailInput";
+import PasswordConfirmInput from "@/components/forms/PasswordConfirmInput";
+import PasswordInput from "@/components/forms/PasswordInput";
 import { useAuth } from "@/hooks/queries/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
@@ -18,12 +18,6 @@ const schema = z
     message: "Passwords don't match",
     path: ["passwordConfirm"],
   });
-
-// interface SignupFormValues {
-//   email: string;
-//   password: string;
-//   passwordConfirm: string;
-// }
 
 type SignupFormValues = z.infer<typeof schema>;
 

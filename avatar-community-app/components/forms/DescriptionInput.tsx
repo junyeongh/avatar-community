@@ -1,10 +1,10 @@
 import { Controller, useFormContext } from "react-hook-form";
-import InputField from "./InputField";
+import InputField from "@/components/ui/InputField";
 
 interface DescriptionInputProps {}
 
 export default function DescriptionInput({}: DescriptionInputProps) {
-  const { control, setFocus } = useFormContext();
+  const { control } = useFormContext();
 
   return (
     <Controller

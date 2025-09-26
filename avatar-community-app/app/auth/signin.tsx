@@ -1,6 +1,6 @@
-import EmailInput from "@/components/EmailInput";
-import FixedBottomCTA from "@/components/FixedBottomCTA";
-import PasswordInput from "@/components/PasswordInput";
+import FixedBottomCTA from "@/components/composite/FixedBottomCTA";
+import EmailInput from "@/components/forms/EmailInput";
+import PasswordInput from "@/components/forms/PasswordInput";
 import { useAuth } from "@/hooks/queries/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
@@ -11,11 +11,6 @@ const schema = z.object({
   email: z.email("Please enter a valid email address"),
   password: z.string().min(8, "Password must be at least 8 characters long"),
 });
-
-// interface SigninFormValues {
-//   email: string;
-//   password: string;
-// }
 
 type SigninFormValues = z.infer<typeof schema>;
 

@@ -2,7 +2,7 @@ import { colors } from "@/constants";
 import { Post } from "@/types";
 import { Ionicons, Octicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import Profile from "./Profile";
+import Profile from "@/components/ui/Profile";
 import { useAuth } from "@/hooks/queries/useAuth";
 
 interface FeedItemProps {

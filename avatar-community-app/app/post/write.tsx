@@ -1,6 +1,6 @@
-import Button from "@/components/CustomButton";
-import DescriptionInput from "@/components/DescriptionInput";
-import TitleInput from "@/components/TitleInput";
+import Button from "@/components/ui/Button";
+import DescriptionInput from "@/components/forms/DescriptionInput";
+import TitleInput from "@/components/forms/TitleInput";
 import { useCreatePost } from "@/hooks/queries/usePost";
 import useKeyboardOffset from "@/hooks/useKeyboardOffset";
 import { ImageUri } from "@/types";
@@ -58,10 +58,7 @@ export default function PostWriteScreen() {
         enabled={isKeyboardShown}
         style={{ flex: 1 }}
       >
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <TitleInput />
           <DescriptionInput />
         </ScrollView>

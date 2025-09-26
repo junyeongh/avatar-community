@@ -1,4 +1,4 @@
-import Button from "@/components/CustomButton";
+import Button from "@/components/ui/Button";
 import { colors } from "@/constants";
 import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";

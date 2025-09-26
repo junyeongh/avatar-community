@@ -1,25 +1,25 @@
 import { Controller, useFormContext } from "react-hook-form";
-import InputField from "./InputField";
+import InputField from "@/components/ui/InputField";
 
-export default function EmailInput() {
+interface TitleInputProps {}
+
+export default function TitleInput({}: TitleInputProps) {
   const { control, setFocus } = useFormContext();
 
   return (
     <Controller
-      name="email"
+      name="title"
       control={control}
       rules={{ required: true }}
       render={({ field: { value, onChange }, fieldState: { error } }) => (
         <InputField
-          autoFocus
-          label="E-mail"
-          placeholder="Please input your email."
-          inputMode="email"
-          returnKeyType="next"
+          label="Title"
+          placeholder="Please input the title."
           submitBehavior="submit"
-          onSubmitEditing={() => setFocus("password")}
+          returnKeyType="next"
           value={value}
           onChangeText={onChange}
+          onSubmitEditing={() => setFocus("description")}
           error={error?.message}
         />
       )}
