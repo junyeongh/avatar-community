@@ -1,6 +1,12 @@
 import { colors } from "@/constants";
 import { ReactNode } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+// import "dayjs/locale/ko";
+
+dayjs.extend(relativeTime);
+// dayjs.locale("ko");
 
 interface ProfileProps {
   onPress: () => void;
@@ -10,27 +16,18 @@ interface ProfileProps {
   option?: ReactNode;
 }
 
-export default function Profile({
-  onPress,
-  nickname,
-  imageUri,
-  createdAt,
-  option,
-}: ProfileProps) {
+export default function Profile({ onPress, nickname, imageUri, createdAt, option }: ProfileProps) {
   return (
     <View style={styles.container}>
       <Pressable style={styles.profileContainer} onPress={onPress}>
         <Image
-          source={
-            imageUri
-              ? { uri: imageUri }
-              : require("@/assets/images/default-avatar.png")
-          }
+          source={imageUri ? { uri: imageUri } : require("@/assets/images/default-avatar.png")}
           style={styles.avatar}
         />
         <View>
           <Text style={styles.nickname}>{nickname}</Text>
-          <Text style={styles.createdAt}>{createdAt}</Text>
+          {/* <Text style={styles.createdAt}>{dayjs(createdAt).format("YYYY-MM-DD hh:mm A")}</Text> */}
+          <Text style={styles.createdAt}>{dayjs(createdAt).fromNow()}</Text>
         </View>
       </Pressable>
       {option}
