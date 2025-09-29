@@ -24,5 +24,6 @@ export const queryKeys = {
   GET_ME: "getMe",
   // Post
   POST: "post",
+  GET_POST: "getPost",
   GET_POSTS: "getPosts",
 };

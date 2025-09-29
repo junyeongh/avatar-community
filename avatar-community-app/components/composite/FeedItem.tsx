@@ -4,6 +4,9 @@ import { Ionicons, Octicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Profile from "@/components/ui/Profile";
 import { useAuth } from "@/hooks/queries/useAuth";
+import { useActionSheet } from "@expo/react-native-action-sheet";
+import { useDeletePost } from "@/hooks/queries/usePost";
+import { router } from "expo-router";
 
 interface FeedItemProps {
   post: Post;
@@ -14,6 +17,36 @@ export default function FeedItem({ post }: FeedItemProps) {
   const likedUsers = post.likes?.map((like) => Number(like.userId));
   const isLiked = likedUsers?.includes(Number(auth.id));
 
+  const { showActionSheetWithOptions } = useActionSheet();
+  const deletePost = useDeletePost();
+
+  const handlePressOption = () => {
+    const options = ["Delete", "Edit", "Cancel"]; // 0: "Delete", 1: "Edit", 2: "Cancel"
+    const destructiveButtonIndex = 0;
+    const cancelButtonIndex = 2;
+
+    showActionSheetWithOptions(
+      { options, cancelButtonIndex, destructiveButtonIndex },
+      (selectedIndex?: number) => {
+        switch (selectedIndex) {
+          case 0: // Delete
+            deletePost.mutate(post.id);
+            break;
+          case 1: // Edit
+            router.push({
+              pathname: "/post/update/[id]",
+              params: { id: post.id },
+            });
+            break;
+          case 2: // Cancel
+            break;
+          default:
+            break;
+        }
+      }
+    );
+  };
+
   return (
     <View style={[styles.container]}>
       <View style={[styles.contenContainer]}>
@@ -22,6 +55,16 @@ export default function FeedItem({ post }: FeedItemProps) {
           imageUri={post.author.imageUri}
           nickname={post.author.nickname}
           createdAt={post.createdAt}
+          option={
+            auth.id === post.author.id && (
+              <Ionicons
+                name="ellipsis-vertical"
+                size={24}
+                color={colors.BLACK}
+                onPress={handlePressOption}
+              />
+            )
+          }
         />
         <Text style={styles.title}>{post.title}</Text>
         <Text numberOfLines={3} style={styles.description}>
