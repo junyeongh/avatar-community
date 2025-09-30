@@ -17,16 +17,16 @@ export default function PasswordInput({
 
   return (
     <Controller
-      name="password"
+      name='password'
       control={control}
       rules={{ required: true }}
       render={({ field: { ref, value, onChange }, fieldState: { error } }) => (
         <InputField
           ref={ref}
-          label="Password"
-          placeholder="Please input your password."
+          label='Password'
+          placeholder='Please input your password.'
           secureTextEntry={shouldHidePassword}
-          textContentType="password"
+          textContentType='password'
           returnKeyType={returnKeyType}
           submitBehavior={submitBehavior}
           onSubmitEditing={() => setFocus("passwordConfirm")}

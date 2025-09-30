@@ -8,15 +8,15 @@ export default function DescriptionInput({}: DescriptionInputProps) {
 
   return (
     <Controller
-      name="description"
+      name='description'
       control={control}
       rules={{ required: true }}
       render={({ field: { ref, value, onChange }, fieldState: { error } }) => (
         <InputField
           ref={ref}
-          label="Description"
-          placeholder="Please description the title."
-          returnKeyType="next"
+          label='Description'
+          placeholder='Please description the title.'
+          returnKeyType='next'
           value={value}
           onChangeText={onChange}
           error={error?.message}

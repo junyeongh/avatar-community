@@ -2,7 +2,11 @@ import { getMe, postSignin, postSignup } from "@/api/auth";
 import { queryClient } from "@/api/queryClient";
 import { queryKeys } from "@/constants";
 import { removeHeader, setHeader } from "@/utils/header";
-import { deleteSecureStore, getSecureStore, setSecureStore } from "@/utils/secureStore";
+import {
+  deleteSecureStore,
+  getSecureStore,
+  setSecureStore,
+} from "@/utils/secureStore";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useEffect } from "react";

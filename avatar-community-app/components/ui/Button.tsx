@@ -7,7 +7,12 @@ interface CustomButtonProps extends PressableProps {
   variant?: "standard" | "filled";
 }
 
-export default function Button({ label, size = "large", variant = "filled", ...props }: CustomButtonProps) {
+export default function Button({
+  label,
+  size = "large",
+  variant = "filled",
+  ...props
+}: CustomButtonProps) {
   return (
     <Pressable
       style={({ pressed }) => [
@@ -18,7 +23,9 @@ export default function Button({ label, size = "large", variant = "filled", ...p
       ]}
       {...props}
     >
-      <Text style={[styles.text, { color: styles[variant].color }]}>{label}</Text>
+      <Text style={[styles.text, { color: styles[variant].color }]}>
+        {label}
+      </Text>
     </Pressable>
   );
 }

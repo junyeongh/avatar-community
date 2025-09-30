@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AuthHome() {
   return (
-    <SafeAreaView style={styles.container} edges={['right', 'bottom', 'left']}>
+    <SafeAreaView style={styles.container} edges={["right", "bottom", "left"]}>
       <View style={styles.imageContainer}>
         <Image
           source={require("@/assets/images/logo.png")}
@@ -14,7 +14,7 @@ export default function AuthHome() {
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          label="Sign in with E-mail"
+          label='Sign in with E-mail'
           onPress={() => router.push("/auth/signin")}
         />
         <Link href={"/auth/signup"} style={styles.signUpText}>

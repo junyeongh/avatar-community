@@ -7,7 +7,8 @@ export default function useKeyboardOffset() {
 
   const insets = useSafeAreaInsets();
   const verticalInsets = insets.top + insets.bottom;
-  const keyboardVerticalOffsetValue = (Keyboard.metrics()?.height || 0) + verticalInsets + 50;
+  const keyboardVerticalOffsetValue =
+    (Keyboard.metrics()?.height || 0) + verticalInsets + 50;
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener("keyboardDidShow", () => {

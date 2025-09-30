@@ -37,7 +37,10 @@ export default function SignInScreen() {
         <EmailInput />
         <PasswordInput />
       </View>
-      <FixedBottomCTA label="Sign in" onPress={signInForm.handleSubmit(onSubmit)} />
+      <FixedBottomCTA
+        label='Sign in'
+        onPress={signInForm.handleSubmit(onSubmit)}
+      />
     </FormProvider>
   );
 }

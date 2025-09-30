@@ -16,12 +16,22 @@ interface ProfileProps {
   option?: ReactNode;
 }
 
-export default function Profile({ onPress, nickname, imageUri, createdAt, option }: ProfileProps) {
+export default function Profile({
+  onPress,
+  nickname,
+  imageUri,
+  createdAt,
+  option,
+}: ProfileProps) {
   return (
     <View style={styles.container}>
       <Pressable style={styles.profileContainer} onPress={onPress}>
         <Image
-          source={imageUri ? { uri: imageUri } : require("@/assets/images/default-avatar.png")}
+          source={
+            imageUri
+              ? { uri: imageUri }
+              : require("@/assets/images/default-avatar.png")
+          }
           style={styles.avatar}
         />
         <View>

@@ -10,7 +10,8 @@ interface FeedListProps {}
 export default function FeedList({}: FeedListProps) {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useGetInfinitePosts();
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
+    useGetInfinitePosts();
 
   const flatListRef = useRef<FlatList | null>(null);
   useScrollToTop(flatListRef);

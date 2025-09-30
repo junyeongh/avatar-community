@@ -8,15 +8,15 @@ export default function TitleInput({}: TitleInputProps) {
 
   return (
     <Controller
-      name="title"
+      name='title'
       control={control}
       rules={{ required: true }}
       render={({ field: { value, onChange }, fieldState: { error } }) => (
         <InputField
-          label="Title"
-          placeholder="Please input the title."
-          submitBehavior="submit"
-          returnKeyType="next"
+          label='Title'
+          placeholder='Please input the title.'
+          submitBehavior='submit'
+          returnKeyType='next'
           value={value}
           onChangeText={onChange}
           onSubmitEditing={() => setFocus("description")}

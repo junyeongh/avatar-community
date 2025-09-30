@@ -1,6 +1,12 @@
 import { colors } from "@/constants";
 import { Ref } from "react";
-import { StyleSheet, Text, TextInput, TextInputProps, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputProps,
+  View,
+} from "react-native";
 
 interface InputFieldProps extends TextInputProps {
   label?: string;
@@ -9,7 +15,13 @@ interface InputFieldProps extends TextInputProps {
   ref?: Ref<TextInput>;
 }
 
-export default function InputField({ label, variant = "filled", error = "", ref, ...props }: InputFieldProps) {
+export default function InputField({
+  label,
+  variant = "filled",
+  error = "",
+  ref,
+  ...props
+}: InputFieldProps) {
   return (
     <View>
       {label && <Text style={styles.label}>{label}</Text>}
@@ -18,14 +30,18 @@ export default function InputField({ label, variant = "filled", error = "", ref,
           styles.container,
           styles[variant],
           Boolean(error) && styles.inputError,
-          props.multiline && { alignItems: "flex-start", paddingVertical:10, height:200 },
+          props.multiline && {
+            alignItems: "flex-start",
+            paddingVertical: 10,
+            height: 200,
+          },
         ]}
       >
         <TextInput
           ref={ref}
           placeholderTextColor={colors.GRAY_500}
           style={styles.input}
-          autoCapitalize="none"
+          autoCapitalize='none'
           spellCheck={false}
           autoCorrect={false}
           {...props}

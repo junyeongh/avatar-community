@@ -8,17 +8,17 @@ export default function PasswordConfirmInput() {
 
   return (
     <Controller
-      name="passwordConfirm"
+      name='passwordConfirm'
       control={control}
       rules={{ required: true }}
       render={({ field: { ref, value, onChange }, fieldState: { error } }) => (
         <>
           <InputField
             ref={ref}
-            label="Confirm password"
-            placeholder="Please confirm your password."
+            label='Confirm password'
+            placeholder='Please confirm your password.'
             secureTextEntry={shouldHidePassword}
-            textContentType="password"
+            textContentType='password'
             value={value}
             onChangeText={onChange}
             error={error?.message}

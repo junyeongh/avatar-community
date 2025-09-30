@@ -43,7 +43,7 @@ export default function FeedItem({ post }: FeedItemProps) {
           default:
             break;
         }
-      }
+      },
     );
   };
 
@@ -58,7 +58,7 @@ export default function FeedItem({ post }: FeedItemProps) {
           option={
             auth.id === post.author.id && (
               <Ionicons
-                name="ellipsis-vertical"
+                name='ellipsis-vertical'
                 size={24}
                 color={colors.BLACK}
                 onPress={handlePressOption}
@@ -85,12 +85,12 @@ export default function FeedItem({ post }: FeedItemProps) {
         </Pressable>
         {/* Comment */}
         <Pressable style={styles.menu}>
-          <Octicons name="comment" size={16} color={colors.BLACK} />
+          <Octicons name='comment' size={16} color={colors.BLACK} />
           <Text style={styles.menuText}>{post.commentCount || "Comment"}</Text>
         </Pressable>
         {/* View */}
         <Pressable style={styles.menu}>
-          <Ionicons name="eye-outline" size={16} color={colors.BLACK} />
+          <Ionicons name='eye-outline' size={16} color={colors.BLACK} />
           <Text style={styles.menuText}>{post.viewCount}</Text>
         </Pressable>
       </View>

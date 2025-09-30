@@ -6,17 +6,17 @@ export default function EmailInput() {
 
   return (
     <Controller
-      name="email"
+      name='email'
       control={control}
       rules={{ required: true }}
       render={({ field: { value, onChange }, fieldState: { error } }) => (
         <InputField
           autoFocus
-          label="E-mail"
-          placeholder="Please input your email."
-          inputMode="email"
-          returnKeyType="next"
-          submitBehavior="submit"
+          label='E-mail'
+          placeholder='Please input your email.'
+          inputMode='email'
+          returnKeyType='next'
+          submitBehavior='submit'
           onSubmitEditing={() => setFocus("password")}
           value={value}
           onChangeText={onChange}

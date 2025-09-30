@@ -12,19 +12,19 @@ export default function AuthLayout() {
       }}
     >
       <Stack.Screen
-        name="index"
+        name='index'
         options={{
           title: "Log in",
           headerShown: true,
           headerLeft: () => (
             <Link href={"/"} replace style={{ paddingRight: 12 }}>
-              <Foundation name="home" size={28} color="black" />
+              <Foundation name='home' size={28} color='black' />
             </Link>
           ),
         }}
       />
       <Stack.Screen
-        name="signin"
+        name='signin'
         options={{
           title: "Sign in with E-mail",
           headerShown: true,
@@ -32,7 +32,7 @@ export default function AuthLayout() {
         }}
       />
       <Stack.Screen
-        name="signup"
+        name='signup'
         options={{
           title: "Sign up with E-mail",
           headerShown: true,

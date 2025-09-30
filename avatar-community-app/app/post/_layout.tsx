@@ -13,25 +13,30 @@ export default function PostLayout() {
       }}
     >
       <Stack.Screen
-        name="write"
+        name='write'
         options={{
           title: "Write a post",
           headerShown: true,
           headerLeft: () => (
             <Link href={"/"} replace style={{ paddingRight: 12 }}>
-              <Feather name="arrow-left" size={28} color="black" />
+              <Feather name='arrow-left' size={28} color='black' />
             </Link>
           ),
         }}
       />
       <Stack.Screen
-        name="update/[id]"
+        name='update/[id]'
         options={{
           title: "Edit a post",
           headerShown: true,
           headerLeft: () => (
             <Link href={"/"} replace style={{ paddingRight: 12 }}>
-              <Feather name="arrow-left" size={28} color="black" onPress={() => router.back()} />
+              <Feather
+                name='arrow-left'
+                size={28}
+                color='black'
+                onPress={() => router.back()}
+              />
             </Link>
           ),
         }}

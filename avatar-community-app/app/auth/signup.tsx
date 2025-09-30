@@ -12,7 +12,9 @@ const schema = z
   .object({
     email: z.email("Please enter a valid email address"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
-    passwordConfirm: z.string().min(8, "Password must be at least 8 characters long"),
+    passwordConfirm: z
+      .string()
+      .min(8, "Password must be at least 8 characters long"),
   })
   .refine((data) => data.password === data.passwordConfirm, {
     message: "Passwords don't match",
@@ -43,10 +45,13 @@ export default function SignUpScreen() {
     <FormProvider {...signUpForm}>
       <View style={styles.container}>
         <EmailInput />
-        <PasswordInput submitBehavior="submit" returnKeyType="next" />
+        <PasswordInput submitBehavior='submit' returnKeyType='next' />
         <PasswordConfirmInput />
       </View>
-      <FixedBottomCTA label="Sign up" onPress={signUpForm.handleSubmit(onSubmit)} />
+      <FixedBottomCTA
+        label='Sign up'
+        onPress={signUpForm.handleSubmit(onSubmit)}
+      />
     </FormProvider>
   );
 }

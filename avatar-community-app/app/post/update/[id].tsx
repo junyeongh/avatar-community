@@ -39,9 +39,9 @@ export default function PostUpdateScreen() {
     navigation.setOptions({
       headerRight: () => (
         <Button
-          label="Save"
-          size="medium"
-          variant="standard"
+          label='Save'
+          size='medium'
+          variant='standard'
           onPress={postForm.handleSubmit(onSubmit)}
         />
       ),
@@ -60,12 +60,15 @@ export default function PostUpdateScreen() {
   return (
     <FormProvider {...postForm}>
       <KeyboardAvoidingView
-        behavior="padding"
+        behavior='padding'
         keyboardVerticalOffset={keyboardVerticalOffsetValue}
         enabled={isKeyboardShown}
         style={{ flex: 1 }}
       >
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}
+        >
           <TitleInput />
           <DescriptionInput />
         </ScrollView>

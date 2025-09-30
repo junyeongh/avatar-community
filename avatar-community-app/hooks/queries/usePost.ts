@@ -1,4 +1,10 @@
-import { createPost, deletePost, getPost, getPosts, updatePost } from "@/api/post";
+import {
+  createPost,
+  deletePost,
+  getPost,
+  getPosts,
+  updatePost,
+} from "@/api/post";
 import { queryClient } from "@/api/queryClient";
 import { queryKeys } from "@/constants";
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
@@ -9,7 +15,9 @@ export function useCreatePost() {
     mutationFn: createPost,
     onSuccess: () => {
       router.replace("/");
-      queryClient.invalidateQueries({ queryKey: [queryKeys.POST, queryKeys.GET_POSTS] });
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.POST, queryKeys.GET_POSTS],
+      });
     },
   });
 }

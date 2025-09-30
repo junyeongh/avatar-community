@@ -13,7 +13,7 @@ export default function MyLayout() {
       }}
     >
       <Stack.Screen
-        name="index"
+        name='index'
         options={{
           headerShown: false,
           title: "My profile",
