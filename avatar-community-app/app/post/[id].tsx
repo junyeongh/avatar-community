@@ -1,12 +1,13 @@
+import { useLocalSearchParams } from "expo-router";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import FeedItem from "@/components/feed/FeedItem";
 import AuthRoute from "@/components/hoc/AuthRoute";
 import KeyboardAvoidingScrollView from "@/components/hoc/KeyboardAvoidingScrollView";
 import InputField from "@/components/ui/InputField";
 import { colors } from "@/constants";
 import { useGetPost } from "@/hooks/queries/usePost";
-import { useLocalSearchParams } from "expo-router";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function PostDetailViewScreen() {
   const { id } = useLocalSearchParams();

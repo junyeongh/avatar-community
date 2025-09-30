@@ -1,6 +1,7 @@
-import { colors } from "@/constants";
 import Foundation from "@expo/vector-icons/Foundation";
 import { Link, Stack } from "expo-router";
+
+import { colors } from "@/constants";
 
 export default function AuthLayout() {
   return (

@@ -1,12 +1,13 @@
-import FixedBottomCTA from "@/components/hoc/FixedBottomCTA";
-import EmailInput from "@/components/forms/EmailInput";
-import PasswordConfirmInput from "@/components/forms/PasswordConfirmInput";
-import PasswordInput from "@/components/forms/PasswordInput";
-import { useAuth } from "@/hooks/queries/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
 import { z } from "zod";
+
+import EmailInput from "@/components/forms/EmailInput";
+import PasswordConfirmInput from "@/components/forms/PasswordConfirmInput";
+import PasswordInput from "@/components/forms/PasswordInput";
+import FixedBottomCTA from "@/components/hoc/FixedBottomCTA";
+import { useAuth } from "@/hooks/queries/useAuth";
 
 const schema = z
   .object({

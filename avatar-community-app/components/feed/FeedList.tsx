@@ -1,9 +1,11 @@
-import { colors } from "@/constants";
-import { FlatList, StyleSheet } from "react-native";
-import FeedItem from "./FeedItem";
-import { useGetInfinitePosts } from "@/hooks/queries/usePost";
-import { useRef, useState } from "react";
 import { useScrollToTop } from "@react-navigation/native";
+import { useRef, useState } from "react";
+import { FlatList, StyleSheet } from "react-native";
+
+import { colors } from "@/constants";
+import { useGetInfinitePosts } from "@/hooks/queries/usePost";
+
+import FeedItem from "./FeedItem";
 
 interface FeedListProps {}
 

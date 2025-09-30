@@ -1,4 +1,5 @@
 import { CreatePostDto, Post } from "@/types";
+
 import { axiosInstance } from "./axios";
 
 export async function createPost(body: CreatePostDto) {

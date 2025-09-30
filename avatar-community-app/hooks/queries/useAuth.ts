@@ -1,3 +1,7 @@
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { router } from "expo-router";
+import { useEffect } from "react";
+
 import { getMe, postSignin, postSignup } from "@/api/auth";
 import { queryClient } from "@/api/queryClient";
 import { queryKeys } from "@/constants";
@@ -7,9 +11,6 @@ import {
   getSecureStore,
   setSecureStore,
 } from "@/utils/secureStore";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { router } from "expo-router";
-import { useEffect } from "react";
 
 function useGetMe() {
   const { data, isError, isSuccess } = useQuery({

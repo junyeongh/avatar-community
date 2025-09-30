@@ -1,7 +1,8 @@
-import Button from "@/components/ui/Button";
-import { colors } from "@/constants";
 import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+
+import Button from "@/components/ui/Button";
+import { colors } from "@/constants";
 
 //call-to-action
 interface FixedBottomCTAProps {

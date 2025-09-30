@@ -1,3 +1,6 @@
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+import { router } from "expo-router";
+
 import {
   createPost,
   deletePost,
@@ -7,8 +10,6 @@ import {
 } from "@/api/post";
 import { queryClient } from "@/api/queryClient";
 import { queryKeys } from "@/constants";
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
-import { router } from "expo-router";
 
 export function useCreatePost() {
   return useMutation({

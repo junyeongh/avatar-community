@@ -1,10 +1,11 @@
-import FeedList from "@/components/feed/FeedList";
-import { colors } from "@/constants";
-import { useAuth } from "@/hooks/queries/useAuth";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Pressable, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import FeedList from "@/components/feed/FeedList";
+import { colors } from "@/constants";
+import { useAuth } from "@/hooks/queries/useAuth";
 
 export default function HomeScreen() {
   const { auth } = useAuth();

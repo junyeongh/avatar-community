@@ -1,4 +1,3 @@
-import { colors } from "@/constants";
 import { Ref } from "react";
 import {
   StyleSheet,
@@ -7,6 +6,8 @@ import {
   TextInputProps,
   View,
 } from "react-native";
+
+import { colors } from "@/constants";
 
 interface InputFieldProps extends TextInputProps {
   label?: string;

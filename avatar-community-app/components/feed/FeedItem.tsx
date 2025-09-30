@@ -1,12 +1,13 @@
-import { colors } from "@/constants";
-import { Post } from "@/types";
-import { Ionicons, Octicons } from "@expo/vector-icons";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import Profile from "@/components/ui/Profile";
-import { useAuth } from "@/hooks/queries/useAuth";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { useDeletePost } from "@/hooks/queries/usePost";
+import { Ionicons, Octicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+
+import Profile from "@/components/ui/Profile";
+import { colors } from "@/constants";
+import { useAuth } from "@/hooks/queries/useAuth";
+import { useDeletePost } from "@/hooks/queries/usePost";
+import { Post } from "@/types";
 
 interface FeedItemProps {
   post: Post;

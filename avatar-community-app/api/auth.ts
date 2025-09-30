@@ -1,5 +1,6 @@
 import { Profile } from "@/types";
 import { getSecureStore } from "@/utils/secureStore";
+
 import { axiosInstance } from "./axios";
 
 type UserRequestBody = {

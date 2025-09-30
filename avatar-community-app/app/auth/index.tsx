@@ -1,7 +1,8 @@
-import Button from "@/components/ui/Button";
 import { Link, router } from "expo-router";
 import { Image, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import Button from "@/components/ui/Button";
 
 export default function AuthHome() {
   return (
