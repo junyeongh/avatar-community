@@ -1,15 +1,16 @@
+import { useNavigation } from "expo-router";
+import { useEffect } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import z from "zod";
+
 import Button from "@/components/ui/Button";
 import DescriptionInput from "@/components/forms/DescriptionInput";
 import TitleInput from "@/components/forms/TitleInput";
 import { useCreatePost } from "@/hooks/queries/usePost";
-import useKeyboardOffset from "@/hooks/useKeyboardOffset";
 import { ImageUri } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation } from "expo-router";
-import { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
-import z from "zod";
+import KeyboardAvoidingScrollView from "@/components/hoc/KeyboardAvoidingScrollView";
+import { View } from "react-native";
 
 const schema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -21,7 +22,6 @@ type PostFormValues = z.infer<typeof schema>;
 
 export default function PostWriteScreen() {
   const createPost = useCreatePost();
-  const { isKeyboardShown, keyboardVerticalOffsetValue } = useKeyboardOffset();
 
   const onSubmit = (formValues: PostFormValues) => {
     createPost.mutate(formValues);
@@ -52,31 +52,12 @@ export default function PostWriteScreen() {
 
   return (
     <FormProvider {...postForm}>
-      <KeyboardAvoidingView
-        behavior='padding'
-        keyboardVerticalOffset={keyboardVerticalOffsetValue}
-        enabled={isKeyboardShown}
-        style={{ flex: 1 }}
-      >
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
+      <KeyboardAvoidingScrollView>
+        <View style={{ padding: 16, gap: 16 }}>
           <TitleInput />
           <DescriptionInput />
-        </ScrollView>
-      </KeyboardAvoidingView>
+        </View>
+      </KeyboardAvoidingScrollView>
     </FormProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  contentContainer: {
-    flexGrow: 1,
-    padding: 16,
-    gap: 16,
-  },
-});

@@ -45,5 +45,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingVertical: 12,
     backgroundColor: colors.GRAY_200,
+    gap: 12,
   },
 });

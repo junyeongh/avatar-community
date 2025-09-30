@@ -10,9 +10,13 @@ import { router } from "expo-router";
 
 interface FeedItemProps {
   post: Post;
+  isDetailView?: boolean;
 }
 
-export default function FeedItem({ post }: FeedItemProps) {
+export default function FeedItem({
+  post,
+  isDetailView = false,
+}: FeedItemProps) {
   const { auth } = useAuth();
   const likedUsers = post.likes?.map((like) => Number(like.userId));
   const isLiked = likedUsers?.includes(Number(auth.id));
@@ -47,8 +51,19 @@ export default function FeedItem({ post }: FeedItemProps) {
     );
   };
 
+  const handlePressFeed = () => {
+    if (!isDetailView) {
+      router.push({
+        pathname: "/post/[id]",
+        params: { id: post.id },
+      });
+    }
+  };
+
+  const ContainerComponent = isDetailView ? View : Pressable;
+
   return (
-    <View style={[styles.container]}>
+    <ContainerComponent style={[styles.container]} onPress={handlePressFeed}>
       <View style={[styles.contenContainer]}>
         <Profile
           onPress={() => {}}
@@ -94,7 +109,7 @@ export default function FeedItem({ post }: FeedItemProps) {
           <Text style={styles.menuText}>{post.viewCount}</Text>
         </Pressable>
       </View>
-    </View>
+    </ContainerComponent>
   );
 }
 

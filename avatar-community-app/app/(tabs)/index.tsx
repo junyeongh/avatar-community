@@ -1,4 +1,4 @@
-import FeedList from "@/components/composite/FeedList";
+import FeedList from "@/components/feed/FeedList";
 import { colors } from "@/constants";
 import { useAuth } from "@/hooks/queries/useAuth";
 import { Ionicons } from "@expo/vector-icons";

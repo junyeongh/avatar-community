@@ -1,4 +1,4 @@
-import FixedBottomCTA from "@/components/composite/FixedBottomCTA";
+import FixedBottomCTA from "@/components/hoc/FixedBottomCTA";
 import EmailInput from "@/components/forms/EmailInput";
 import PasswordConfirmInput from "@/components/forms/PasswordConfirmInput";
 import PasswordInput from "@/components/forms/PasswordInput";
