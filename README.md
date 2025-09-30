@@ -6,3 +6,6 @@ React Native-based community app project following the [Inflearn course. (아바
 - [Intro | Zod](https://zod.dev/)
 - [TanStack Query](https://tanstack.com/query/latest)
 - [calintamas/react-native-toast-message: Animated toast message component for React Native](https://github.com/calintamas/react-native-toast-message)
+- [expo/react-native-action-sheet: A cross-platform ActionSheet for React Native](https://github.com/expo/react-native-action-sheet)
+
+[@expo/vector-icons@15.0.2](https://icons.expo.fyi/Index)
