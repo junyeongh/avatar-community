@@ -1,20 +1,24 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { TextInputProps } from "react-native";
+import { Pressable, TextInputProps } from "react-native";
 
 import InputField from "@/components/ui/InputField";
+import { colors } from "@/constants";
 
 interface PasswordInputProps {
   submitBehavior?: TextInputProps["submitBehavior"];
   returnKeyType?: TextInputProps["returnKeyType"];
+  handleSubmitEditing: () => void;
 }
 
 export default function PasswordInput({
   submitBehavior = "blurAndSubmit",
   returnKeyType = "default",
+  handleSubmitEditing,
 }: PasswordInputProps) {
   const [shouldHidePassword, setShouldHidePassword] = useState(true);
-  const { control, setFocus } = useFormContext();
+  const { control } = useFormContext();
 
   return (
     <Controller
@@ -30,10 +34,27 @@ export default function PasswordInput({
           textContentType='password'
           returnKeyType={returnKeyType}
           submitBehavior={submitBehavior}
-          onSubmitEditing={() => setFocus("passwordConfirm")}
+          onSubmitEditing={handleSubmitEditing}
           value={value}
           onChangeText={onChange}
           error={error?.message}
+          rightChild={
+            <Pressable onPress={() => setShouldHidePassword((prev) => !prev)}>
+              {shouldHidePassword ? (
+                <Ionicons
+                  name='eye-outline'
+                  size={24}
+                  color={colors.GRAY_500}
+                />
+              ) : (
+                <Ionicons
+                  name='eye-off-outline'
+                  size={24}
+                  color={colors.GRAY_500}
+                />
+              )}
+            </Pressable>
+          }
         />
       )}
     />

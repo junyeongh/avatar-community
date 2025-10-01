@@ -1,6 +1,8 @@
 import {
+  Keyboard,
   KeyboardAvoidingView,
   ScrollView,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
@@ -25,7 +27,9 @@ export default function KeyboardAvoidingScrollView({
       enabled={isKeyboardShown}
       style={{ flex: 1 }}
     >
-      <View style={{ flexGrow: 1 }}>{children}</View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{ flexGrow: 1 }}>{children}</View>
+      </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
 }

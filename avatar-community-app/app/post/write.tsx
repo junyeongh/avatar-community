@@ -3,6 +3,7 @@ import { useNavigation } from "expo-router";
 import { useEffect, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import z from "zod";
 
 import DescriptionInput from "@/components/forms/DescriptionInput";
@@ -54,15 +55,19 @@ export default function PostWriteScreen() {
 
   return (
     <FormProvider {...postForm}>
-      <KeyboardAvoidingScrollView scrollViewRef={scrollViewRef}>
-        <ScrollView
-          ref={scrollViewRef}
-          contentContainerStyle={{ padding: 16, gap: 16 }}
-        >
-          <TitleInput />
-          <DescriptionInput />
-        </ScrollView>
-      </KeyboardAvoidingScrollView>
+      <SafeAreaView style={{ flex: 1 }} edges={["bottom", "left", "right"]}>
+        <KeyboardAvoidingScrollView scrollViewRef={scrollViewRef}>
+          <ScrollView
+            ref={scrollViewRef}
+            contentContainerStyle={{ padding: 16, gap: 16 }}
+          >
+            <TitleInput />
+            <DescriptionInput />
+            <DescriptionInput />
+            <DescriptionInput />
+          </ScrollView>
+        </KeyboardAvoidingScrollView>
+      </SafeAreaView>
     </FormProvider>
   );
 }

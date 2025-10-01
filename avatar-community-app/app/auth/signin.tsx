@@ -1,11 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { z } from "zod";
 
 import EmailInput from "@/components/forms/EmailInput";
 import PasswordInput from "@/components/forms/PasswordInput";
 import FixedBottomCTA from "@/components/hoc/FixedBottomCTA";
+import KeyboardAvoidingScrollView from "@/components/hoc/KeyboardAvoidingScrollView";
 import { useAuth } from "@/hooks/queries/useAuth";
 
 const schema = z.object({
@@ -32,16 +34,22 @@ export default function SignInScreen() {
     signinMutation.mutate({ email, password });
   };
 
+  const handleSubmitEditing = signInForm.handleSubmit(onSubmit);
+
   return (
     <FormProvider {...signInForm}>
-      <View style={styles.container}>
-        <EmailInput />
-        <PasswordInput />
-      </View>
-      <FixedBottomCTA
-        label='Sign in'
-        onPress={signInForm.handleSubmit(onSubmit)}
-      />
+      <SafeAreaView style={{ flex: 1 }} edges={["bottom", "left", "right"]}>
+        <KeyboardAvoidingScrollView>
+          <View style={styles.container}>
+            <EmailInput />
+            <PasswordInput handleSubmitEditing={handleSubmitEditing} />
+          </View>
+          <FixedBottomCTA
+            label='Sign in'
+            onPress={signInForm.handleSubmit(onSubmit)}
+          />
+        </KeyboardAvoidingScrollView>
+      </SafeAreaView>
     </FormProvider>
   );
 }

@@ -1,12 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { z } from "zod";
 
 import EmailInput from "@/components/forms/EmailInput";
 import PasswordConfirmInput from "@/components/forms/PasswordConfirmInput";
 import PasswordInput from "@/components/forms/PasswordInput";
 import FixedBottomCTA from "@/components/hoc/FixedBottomCTA";
+import KeyboardAvoidingScrollView from "@/components/hoc/KeyboardAvoidingScrollView";
 import { useAuth } from "@/hooks/queries/useAuth";
 
 const schema = z
@@ -42,17 +44,27 @@ export default function SignUpScreen() {
     signupMutation.mutate({ email, password });
   };
 
+  const handleSubmitEditing = signUpForm.handleSubmit(onSubmit);
+
   return (
     <FormProvider {...signUpForm}>
-      <View style={styles.container}>
-        <EmailInput />
-        <PasswordInput submitBehavior='submit' returnKeyType='next' />
-        <PasswordConfirmInput />
-      </View>
-      <FixedBottomCTA
-        label='Sign up'
-        onPress={signUpForm.handleSubmit(onSubmit)}
-      />
+      <SafeAreaView style={{ flex: 1 }} edges={["bottom", "left", "right"]}>
+        <KeyboardAvoidingScrollView>
+          <View style={styles.container}>
+            <EmailInput />
+            <PasswordInput
+              submitBehavior='submit'
+              returnKeyType='next'
+              handleSubmitEditing={() => signUpForm.setFocus("passwordConfirm")}
+            />
+            <PasswordConfirmInput handleSubmitEditing={handleSubmitEditing} />
+          </View>
+          <FixedBottomCTA
+            label='Sign up'
+            onPress={signUpForm.handleSubmit(onSubmit)}
+          />
+        </KeyboardAvoidingScrollView>
+      </SafeAreaView>
     </FormProvider>
   );
 }
