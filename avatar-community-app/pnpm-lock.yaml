@@ -7,6 +7,9 @@ settings:
 importers:
   .:
     dependencies:
+      "@dev-plugins/react-query":
+        specifier: ^0.3.1
+        version: 0.3.1(@tanstack/react-query@5.90.2(react@19.1.0))(expo@54.0.8)
       "@expo/react-native-action-sheet":
         specifier: ^4.1.1
         version: 4.1.1(@types/react@19.1.13)(react@19.1.0)
@@ -925,6 +928,15 @@ packages:
         integrity: sha512-bkFqkLhh3pMBUQQkpVgWDWq/lqzc2678eUyDlTBhRqhCHFguYYGM0Efga7tYk4TogG/3x0EEl66/OQ+WGbWB/Q==,
       }
     engines: { node: ">=6.9.0" }
+
+  "@dev-plugins/react-query@0.3.1":
+    resolution:
+      {
+        integrity: sha512-xmNfMIwHLhigE/usbGma+W/2G8bHRAfrP83nqTtjPMc7Rt2zSv1Ju3EK3KhkAh3WuHrUMpBIbNJdLgSc+K4tMg==,
+      }
+    peerDependencies:
+      "@tanstack/react-query": "*"
+      expo: ^53.0.5
 
   "@egjs/hammerjs@2.0.17":
     resolution:
@@ -7807,6 +7819,12 @@ snapshots:
     dependencies:
       "@babel/helper-string-parser": 7.27.1
       "@babel/helper-validator-identifier": 7.27.1
+
+  "@dev-plugins/react-query@0.3.1(@tanstack/react-query@5.90.2(react@19.1.0))(expo@54.0.8)":
+    dependencies:
+      "@tanstack/react-query": 5.90.2(react@19.1.0)
+      expo: 54.0.8(@babel/core@7.28.4)(@expo/metro-runtime@6.1.2)(expo-router@6.0.6)(react-native@0.81.4(@babel/core@7.28.4)(@types/react@19.1.13)(react@19.1.0))(react@19.1.0)
+      flatted: 3.3.3
 
   "@egjs/hammerjs@2.0.17":
     dependencies:

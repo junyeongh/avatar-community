@@ -1,3 +1,4 @@
+import { useReactQueryDevTools } from "@dev-plugins/react-query";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
@@ -5,16 +6,18 @@ import { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 
+// import "react-native-reanimated";
+
 import { queryClient } from "@/api/queryClient";
 import { useAuth } from "@/hooks/queries/useAuth";
-
-// import "react-native-reanimated";
 
 export const unstable_settings = {
   anchor: "(tabs)",
 };
 
 export default function RootLayout() {
+  useReactQueryDevTools(queryClient);
+
   return (
     <ActionSheetProvider>
       <QueryClientProvider client={queryClient}>
