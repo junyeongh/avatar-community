@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 import z from "zod";
 
 import DescriptionInput from "@/components/forms/DescriptionInput";
@@ -22,6 +22,8 @@ type PostFormValues = z.infer<typeof schema>;
 
 export default function PostWriteScreen() {
   const createPost = useCreatePost();
+
+  const scrollViewRef = useRef<ScrollView | null>(null);
 
   const onSubmit = (formValues: PostFormValues) => {
     createPost.mutate(formValues);
@@ -52,11 +54,14 @@ export default function PostWriteScreen() {
 
   return (
     <FormProvider {...postForm}>
-      <KeyboardAvoidingScrollView>
-        <View style={{ padding: 16, gap: 16 }}>
+      <KeyboardAvoidingScrollView scrollViewRef={scrollViewRef}>
+        <ScrollView
+          ref={scrollViewRef}
+          contentContainerStyle={{ padding: 16, gap: 16 }}
+        >
           <TitleInput />
           <DescriptionInput />
-        </View>
+        </ScrollView>
       </KeyboardAvoidingScrollView>
     </FormProvider>
   );

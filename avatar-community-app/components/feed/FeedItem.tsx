@@ -35,7 +35,9 @@ export default function FeedItem({
       (selectedIndex?: number) => {
         switch (selectedIndex) {
           case 0: // Delete
-            deletePost.mutate(post.id);
+            deletePost.mutate(post.id, {
+              onSuccess: () => isDetailView && router.back(),
+            });
             break;
           case 1: // Edit
             router.push({
