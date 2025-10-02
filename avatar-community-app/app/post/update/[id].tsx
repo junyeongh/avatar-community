@@ -5,8 +5,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import { KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
 import z from "zod";
 
-import DescriptionInput from "@/components/forms/DescriptionInput";
-import TitleInput from "@/components/forms/TitleInput";
+import DescriptionInput from "@/components/post/DescriptionInput";
+import TitleInput from "@/components/post/TitleInput";
 import Button from "@/components/ui/Button";
 import { useGetPost, useUpdatePost } from "@/hooks/queries/usePost";
 import useKeyboardOffset from "@/hooks/useKeyboardOffset";

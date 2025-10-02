@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import Button from "@/components/ui/Button";
 
-export default function AuthHome() {
+export default function AuthHomeScreen() {
   return (
     <SafeAreaView style={styles.container} edges={["right", "bottom", "left"]}>
       <View style={styles.imageContainer}>

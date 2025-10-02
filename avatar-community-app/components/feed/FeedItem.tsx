@@ -9,6 +9,8 @@ import { useAuth } from "@/hooks/queries/useAuth";
 import { useDeletePost } from "@/hooks/queries/usePost";
 import { Post } from "@/types";
 
+import ImagePreviewList from "../post/ImagePreviewList";
+
 interface FeedItemProps {
   post: Post;
   isDetailView?: boolean;
@@ -88,6 +90,8 @@ export default function FeedItem({
         <Text numberOfLines={3} style={styles.description}>
           {post.description}
         </Text>
+
+        <ImagePreviewList imageUris={post.imageUris} />
       </View>
       <View style={[styles.menuContainer]}>
         {/* Like */}

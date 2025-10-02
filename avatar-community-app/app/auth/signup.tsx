@@ -4,9 +4,9 @@ import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { z } from "zod";
 
-import EmailInput from "@/components/forms/EmailInput";
-import PasswordConfirmInput from "@/components/forms/PasswordConfirmInput";
-import PasswordInput from "@/components/forms/PasswordInput";
+import EmailInput from "@/components/auth/EmailInput";
+import PasswordConfirmInput from "@/components/auth/PasswordConfirmInput";
+import PasswordInput from "@/components/auth/PasswordInput";
 import FixedBottomCTA from "@/components/hoc/FixedBottomCTA";
 import KeyboardAvoidingScrollView from "@/components/hoc/KeyboardAvoidingScrollView";
 import { useAuth } from "@/hooks/queries/useAuth";
