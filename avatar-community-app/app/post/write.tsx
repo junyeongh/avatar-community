@@ -63,8 +63,6 @@ export default function PostWriteScreen() {
           >
             <TitleInput />
             <DescriptionInput />
-            <DescriptionInput />
-            <DescriptionInput />
           </ScrollView>
         </KeyboardAvoidingScrollView>
       </SafeAreaView>

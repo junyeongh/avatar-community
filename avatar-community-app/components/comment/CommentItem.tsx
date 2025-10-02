@@ -1,23 +1,28 @@
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { StyleSheet, View } from "react-native";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
+import InputField from "@/components/ui/InputField";
 import Profile from "@/components/ui/Profile";
 import { colors } from "@/constants";
 import { useAuth } from "@/hooks/queries/useAuth";
 import { useDeleteComment } from "@/hooks/queries/useComment";
 import { Comment } from "@/types";
 
-import InputField from "../ui/InputField";
-
 interface CommentItemProps {
   comment: Comment;
   isReply?: boolean;
+  parentCommentId?: number | null;
+  onReply?: () => void;
+  onCancelReply?: () => void;
 }
 
 export default function CommentItem({
   comment,
   isReply = false,
+  parentCommentId,
+  onReply,
+  onCancelReply,
 }: CommentItemProps) {
   const { auth } = useAuth();
 
@@ -45,11 +50,27 @@ export default function CommentItem({
     );
   };
 
+  const getCommentBackground = () => {
+    if (parentCommentId === comment.id) {
+      return colors.ORANGE_100;
+    }
+    if (isReply) {
+      return colors.GRAY_50;
+    }
+    return colors.WHITE;
+  };
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, { backgroundColor: getCommentBackground() }]}
+    >
       <View style={styles.profileContainer}>
         {isReply && (
-          <MaterialIcons name='arrow-right' size={24} color={colors.BLACK} />
+          <MaterialCommunityIcons
+            name='arrow-right-bottom'
+            size={24}
+            color={colors.BLACK}
+          />
         )}
         <Profile
           imageUri={comment.isDeleted ? "" : comment.user.imageUri}
@@ -75,6 +96,18 @@ export default function CommentItem({
         editable={false}
         value={comment.isDeleted ? "(deleted comment)" : comment.content}
       />
+      {!comment.isDeleted && !isReply && (
+        <View style={styles.replyButtonsContainer}>
+          <Pressable onPress={onReply}>
+            <Text style={styles.replyButton}>Reply</Text>
+          </Pressable>
+          {parentCommentId == comment.id && (
+            <Pressable onPress={onCancelReply}>
+              <Text style={styles.replyCancelButton}>Cancel</Text>
+            </Pressable>
+          )}
+        </View>
+      )}
     </View>
   );
 }
@@ -92,5 +125,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
+  },
+  replyButtonsContainer: {
+    flexDirection: "row",
+    gap: 10,
+  },
+  // elements
+  replyButton: {
+    fontWeight: "bold",
+    color: colors.ORANGE_600,
+    fontSize: 12,
+  },
+  replyCancelButton: {
+    fontWeight: "bold",
+    color: colors.BLACK,
+    fontSize: 12,
   },
 });

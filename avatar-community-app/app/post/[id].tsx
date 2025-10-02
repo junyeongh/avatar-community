@@ -1,6 +1,14 @@
 import { useLocalSearchParams } from "expo-router";
-import { useRef, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Fragment, useRef, useState } from "react";
+import {
+  Keyboard,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import CommentItem from "@/components/comment/CommentItem";
@@ -16,19 +24,39 @@ import { CreateCommentDto } from "@/types";
 export default function PostDetailViewScreen() {
   const { id } = useLocalSearchParams();
 
-  const { data: post, isPending, isError } = useGetPost(Number(id));
   const [commentContent, setCommentContent] = useState("");
+  const [parentCommentId, setParentCommentId] = useState<number | null>(null);
+
+  const { data: post, isPending, isError } = useGetPost(Number(id));
   const createComments = useCreateComment();
 
   const scrollRef = useRef<ScrollView | null>(null);
+  const inputRef = useRef<TextInput | null>(null);
 
   if (isPending || isError) return <></>;
+
+  const handleReply = (commentId: number) => {
+    setParentCommentId(commentId);
+    inputRef.current?.focus();
+  };
+  const handleCancelReply = () => {
+    setParentCommentId(null);
+    Keyboard.dismiss();
+  };
 
   const handleSubmitComment = () => {
     const commentData: CreateCommentDto = {
       content: commentContent,
       postId: post.id,
     };
+
+    if (parentCommentId) {
+      createComments.mutate({ ...commentData, parentCommentId });
+      setCommentContent("");
+      handleCancelReply();
+
+      return;
+    }
 
     createComments.mutate(commentData);
     setCommentContent("");
@@ -54,16 +82,27 @@ export default function PostDetailViewScreen() {
               {post.commentCount} Comment{post.commentCount !== 1 ? "s" : ""}
             </Text>
             {post.comments?.map((comment) => (
-              <CommentItem key={comment.id} comment={comment} />
+              <Fragment key={comment.id}>
+                <CommentItem
+                  comment={comment}
+                  parentCommentId={parentCommentId}
+                  onReply={() => handleReply(comment.id)}
+                  onCancelReply={handleCancelReply}
+                />
+                {comment.replies.map((reply) => (
+                  <CommentItem key={reply.id} comment={reply} isReply />
+                ))}
+              </Fragment>
             ))}
           </ScrollView>
           <View style={styles.commentInputContainer}>
             <InputField
+              ref={inputRef}
               value={commentContent}
               returnKeyType='send'
               onSubmitEditing={handleSubmitComment}
               onChangeText={(text) => setCommentContent(text)}
-              placeholder='Comment'
+              placeholder={parentCommentId ? "Replying..." : "Comment"}
               rightChild={
                 <Pressable
                   style={styles.commentAddButton}
