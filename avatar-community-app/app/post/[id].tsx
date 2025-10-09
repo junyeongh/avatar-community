@@ -14,7 +14,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CommentItem from "@/components/comment/CommentItem";
 import FeedItem from "@/components/feed/FeedItem";
 import AuthRoute from "@/components/hoc/AuthRoute";
-import KeyboardAvoidingScrollView from "@/components/hoc/KeyboardAvoidingScrollView";
+import KeyboardAvoidingViewWrapper from "@/components/hoc/KeyboardAvoidingViewWrapper";
 import InputField from "@/components/ui/InputField";
 import { colors } from "@/constants";
 import { useCreateComment } from "@/hooks/queries/useComment";
@@ -69,7 +69,7 @@ export default function PostDetailViewScreen() {
         style={styles.container}
         edges={["bottom", "left", "right"]}
       >
-        <KeyboardAvoidingScrollView scrollViewRef={scrollRef}>
+        <KeyboardAvoidingViewWrapper scrollViewRef={scrollRef}>
           <ScrollView
             ref={scrollRef}
             style={styles.scrollViewContainer}
@@ -114,7 +114,7 @@ export default function PostDetailViewScreen() {
               }
             />
           </View>
-        </KeyboardAvoidingScrollView>
+        </KeyboardAvoidingViewWrapper>
       </SafeAreaView>
     </AuthRoute>
   );

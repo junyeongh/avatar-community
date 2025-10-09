@@ -43,7 +43,7 @@ export default function InputField({
         <TextInput
           ref={ref}
           placeholderTextColor={colors.GRAY_500}
-          style={styles.input}
+          style={[styles.input, styles[`${variant}Text`]]}
           autoCapitalize='none'
           spellCheck={false}
           autoCorrect={false}
@@ -72,12 +72,28 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   // variant
+  standard: {
+    borderWidth: 1,
+    borderColor: colors.GRAY_200,
+  },
+  standardText: {
+    color: colors.BLACK,
+  },
   filled: {
     backgroundColor: colors.GRAY_100,
   },
-  standard: {},
-  outlined: {},
-  //
+  filledText: {
+    color: colors.BLACK,
+  },
+  outlined: {
+    borderWidth: 1,
+    borderColor: colors.ORANGE_600,
+  },
+  outlinedText: {
+    color: colors.ORANGE_600,
+    fontWeight: "bold",
+  },
+  // error
   inputError: {
     backgroundColor: colors.RED_100,
   },

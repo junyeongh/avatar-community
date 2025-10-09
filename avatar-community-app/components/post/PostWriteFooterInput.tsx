@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useFormContext, useWatch } from "react-hook-form";
 import { Alert, Pressable, StyleSheet, View } from "react-native";
@@ -42,6 +42,14 @@ export function PostWriteFooter() {
     <View style={styles.footerContainer}>
       <Pressable style={styles.footerIcon} onPress={handleOpenImagePicker}>
         <Ionicons name='camera' size={20} color={colors.BLACK} />
+      </Pressable>
+      <Pressable
+        style={styles.footerIcon}
+        onPress={() => {
+          setValue("isVoteOpen", true);
+        }}
+      >
+        <MaterialCommunityIcons name='vote' size={20} color={colors.BLACK} />
       </Pressable>
     </View>
   );

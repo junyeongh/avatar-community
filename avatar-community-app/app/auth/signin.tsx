@@ -7,7 +7,7 @@ import { z } from "zod";
 import EmailInput from "@/components/auth/EmailInput";
 import PasswordInput from "@/components/auth/PasswordInput";
 import FixedBottomCTA from "@/components/hoc/FixedBottomCTA";
-import KeyboardAvoidingScrollView from "@/components/hoc/KeyboardAvoidingScrollView";
+import KeyboardAvoidingViewWrapper from "@/components/hoc/KeyboardAvoidingViewWrapper";
 import { useAuth } from "@/hooks/queries/useAuth";
 
 const schema = z.object({
@@ -39,7 +39,7 @@ export default function SignInScreen() {
   return (
     <FormProvider {...signInForm}>
       <SafeAreaView style={{ flex: 1 }} edges={["bottom", "left", "right"]}>
-        <KeyboardAvoidingScrollView>
+        <KeyboardAvoidingViewWrapper>
           <View style={styles.container}>
             <EmailInput />
             <PasswordInput handleSubmitEditing={handleSubmitEditing} />
@@ -48,7 +48,7 @@ export default function SignInScreen() {
             label='Sign in'
             onPress={signInForm.handleSubmit(onSubmit)}
           />
-        </KeyboardAvoidingScrollView>
+        </KeyboardAvoidingViewWrapper>
       </SafeAreaView>
     </FormProvider>
   );

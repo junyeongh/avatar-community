@@ -8,7 +8,7 @@ import EmailInput from "@/components/auth/EmailInput";
 import PasswordConfirmInput from "@/components/auth/PasswordConfirmInput";
 import PasswordInput from "@/components/auth/PasswordInput";
 import FixedBottomCTA from "@/components/hoc/FixedBottomCTA";
-import KeyboardAvoidingScrollView from "@/components/hoc/KeyboardAvoidingScrollView";
+import KeyboardAvoidingViewWrapper from "@/components/hoc/KeyboardAvoidingViewWrapper";
 import { useAuth } from "@/hooks/queries/useAuth";
 
 const schema = z
@@ -49,7 +49,7 @@ export default function SignUpScreen() {
   return (
     <FormProvider {...signUpForm}>
       <SafeAreaView style={{ flex: 1 }} edges={["bottom", "left", "right"]}>
-        <KeyboardAvoidingScrollView>
+        <KeyboardAvoidingViewWrapper>
           <View style={styles.container}>
             <EmailInput />
             <PasswordInput
@@ -63,7 +63,7 @@ export default function SignUpScreen() {
             label='Sign up'
             onPress={signUpForm.handleSubmit(onSubmit)}
           />
-        </KeyboardAvoidingScrollView>
+        </KeyboardAvoidingViewWrapper>
       </SafeAreaView>
     </FormProvider>
   );

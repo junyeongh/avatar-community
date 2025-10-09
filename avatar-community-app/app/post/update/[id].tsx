@@ -8,6 +8,7 @@ import z from "zod";
 import DescriptionInput from "@/components/post/DescriptionInput";
 import TitleInput from "@/components/post/TitleInput";
 import Button from "@/components/ui/Button";
+import VoteAttached from "@/components/vote/VoteAttached";
 import { useGetPost, useUpdatePost } from "@/hooks/queries/usePost";
 import useKeyboardOffset from "@/hooks/useKeyboardOffset";
 import { ImageUri } from "@/types";
@@ -16,6 +17,7 @@ const schema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().min(5, "Description must be at least 5 characters"),
   imageUris: z.array(z.custom<ImageUri>()),
+  isVoteAttached: z.boolean,
 });
 
 type PostFormValues = z.infer<typeof schema>;
@@ -25,7 +27,7 @@ export default function PostUpdateScreen() {
 
   const { data: post } = useGetPost(Number(id));
   const updatePost = useUpdatePost();
-  const { isKeyboardShown, keyboardVerticalOffsetValue } = useKeyboardOffset();
+  const { isKeyboardShown, keyboardVerticalOffset } = useKeyboardOffset();
 
   const onSubmit = (formValues: PostFormValues) => {
     updatePost.mutate({
@@ -54,6 +56,7 @@ export default function PostUpdateScreen() {
       title: post?.title,
       description: post?.description,
       imageUris: post?.imageUris,
+      isVoteAttached: post?.hasVote,
     },
   });
 
@@ -61,7 +64,7 @@ export default function PostUpdateScreen() {
     <FormProvider {...postForm}>
       <KeyboardAvoidingView
         behavior='padding'
-        keyboardVerticalOffset={keyboardVerticalOffsetValue}
+        keyboardVerticalOffset={keyboardVerticalOffset}
         enabled={isKeyboardShown}
         style={{ flex: 1 }}
       >
@@ -71,6 +74,7 @@ export default function PostUpdateScreen() {
         >
           <TitleInput />
           <DescriptionInput />
+          <VoteAttached />
         </ScrollView>
       </KeyboardAvoidingView>
     </FormProvider>
