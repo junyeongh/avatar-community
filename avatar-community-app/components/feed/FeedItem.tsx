@@ -1,15 +1,15 @@
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { Ionicons, Octicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons, Octicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
+import ImagePreviewList from "@/components/post/ImagePreviewList";
 import Profile from "@/components/ui/Profile";
+import VoteItem from "@/components/vote/VoteItem";
 import { colors } from "@/constants";
 import { useAuth } from "@/hooks/queries/useAuth";
 import { useDeletePost } from "@/hooks/queries/usePost";
 import { Post } from "@/types";
-
-import ImagePreviewList from "../post/ImagePreviewList";
 
 interface FeedItemProps {
   post: Post;
@@ -68,7 +68,7 @@ export default function FeedItem({
   const ContainerComponent = isDetailView ? View : Pressable;
 
   return (
-    <ContainerComponent style={[styles.container]} onPress={handlePressFeed}>
+    <ContainerComponent style={styles.container} onPress={handlePressFeed}>
       <View style={[styles.contenContainer]}>
         <Profile
           onPress={() => {}}
@@ -92,7 +92,29 @@ export default function FeedItem({
         </Text>
 
         <ImagePreviewList imageUris={post.imageUris} />
+
+        {!isDetailView && post.hasVote && (
+          <View style={styles.voteContainer}>
+            <MaterialCommunityIcons
+              name='vote'
+              size={18}
+              color={colors.ORANGE_600}
+            />
+            <Text style={styles.voteCountText}>Vote</Text>
+            <Text style={styles.voteText}>
+              {post.voteCount} has participated
+            </Text>
+          </View>
+        )}
+        {isDetailView && post.hasVote && (
+          <VoteItem
+            postId={post.id}
+            postVotes={post.votes ?? []}
+            voteCount={post.voteCount}
+          />
+        )}
       </View>
+      {/* menu container */}
       <View style={[styles.menuContainer]}>
         {/* Like */}
         <Pressable style={styles.menu}>
@@ -163,5 +185,28 @@ const styles = StyleSheet.create({
   activeMenuText: {
     fontWeight: "500",
     color: colors.ORANGE_600,
+  },
+  // vote
+  voteContainer: {
+    flexDirection: "row",
+    alignContent: "center",
+    marginVertical: 14,
+    gap: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: colors.ORANGE_600,
+    backgroundColor: colors.ORANGE_100,
+  },
+  voteCountText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: colors.ORANGE_600,
+  },
+  voteText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: colors.BLACK,
   },
 });

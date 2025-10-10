@@ -31,7 +31,11 @@ export default function InputField({
       <View
         style={[
           styles.container,
-          styles[variant],
+          {
+            borderColor: styles[variant].borderColor,
+            borderWidth: styles[variant].borderWidth,
+            backgroundColor: styles[variant].backgroundColor,
+          },
           Boolean(error) && styles.inputError,
           props.multiline && {
             alignItems: "flex-start",
@@ -43,7 +47,13 @@ export default function InputField({
         <TextInput
           ref={ref}
           placeholderTextColor={colors.GRAY_500}
-          style={[styles.input, styles[`${variant}Text`]]}
+          style={[
+            styles.input,
+            {
+              color: styles[variant].color,
+              fontWeight: styles[variant].fontWeight,
+            },
+          ]}
           autoCapitalize='none'
           spellCheck={false}
           autoCorrect={false}
@@ -73,23 +83,27 @@ const styles = StyleSheet.create({
   },
   // variant
   standard: {
-    borderWidth: 1,
+    backgroundColor: undefined,
     borderColor: colors.GRAY_200,
-  },
-  standardText: {
+    borderWidth: 1,
+    // Text
     color: colors.BLACK,
+    fontWeight: undefined,
   },
   filled: {
+    // View
     backgroundColor: colors.GRAY_100,
-  },
-  filledText: {
+    borderColor: undefined,
+    borderWidth: undefined,
+    // Text
     color: colors.BLACK,
+    fontWeight: undefined,
   },
   outlined: {
-    borderWidth: 1,
+    backgroundColor: undefined,
     borderColor: colors.ORANGE_600,
-  },
-  outlinedText: {
+    borderWidth: 1,
+    // Text
     color: colors.ORANGE_600,
     fontWeight: "bold",
   },

@@ -11,6 +11,8 @@ export const colors = {
   GRAY_700: "#374151",
   // Red
   RED_100: "#FFDFDF",
+  RED_200: "#FFDEC6",
+  RED_300: "#FFB884",
   RED_500: "#FF5F5F",
   // Orange
   ORANGE_100: "#FFF7F1",

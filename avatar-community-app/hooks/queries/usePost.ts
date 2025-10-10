@@ -3,6 +3,7 @@ import { router } from "expo-router";
 
 import {
   createPost,
+  createVote,
   deletePost,
   getPost,
   getPosts,
@@ -64,6 +65,17 @@ export function useDeletePost() {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [queryKeys.POST, queryKeys.GET_POSTS],
+      });
+    },
+  });
+}
+
+export function useCreateVote() {
+  return useMutation({
+    mutationFn: createVote,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.POST, queryKeys.GET_POST, data.postId],
       });
     },
   });

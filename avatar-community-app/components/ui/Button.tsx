@@ -20,6 +20,7 @@ export default function Button({
         styles.container,
         styles[size],
         { backgroundColor: styles[variant].backgroundColor },
+        props.disabled && styles.disabled,
         pressed && styles.pressed,
       ]}
       {...props}
@@ -59,5 +60,8 @@ const styles = StyleSheet.create({
   // Pressable props
   pressed: {
     opacity: 0.8,
+  },
+  disabled: {
+    backgroundColor: colors.GRAY_300,
   },
 });

@@ -4,7 +4,7 @@ interface User {
   imageUri?: string;
 }
 
-interface Profile extends User {
+export interface Profile extends User {
   email: string;
   introduce?: string;
   hatId: string;
@@ -16,18 +16,18 @@ interface Profile extends User {
   background: string;
 }
 
-interface ImageUri {
+export interface ImageUri {
   id?: number;
   uri: string;
 }
 
-interface VoteOption {
+export interface VoteOption {
   id?: number;
   displayPriority: number;
   content: string;
 }
 
-interface CreatePostDto {
+export interface CreatePostDto {
   title: string;
   description: string;
   imageUris: ImageUri[];
@@ -35,25 +35,25 @@ interface CreatePostDto {
   voteOptions?: VoteOption[];
 }
 
-interface CreateCommentDto {
+export interface CreateCommentDto {
   content: string;
   postId: number;
   parentCommentId?: number;
 }
 
-interface CreateVoteDto {
+export interface CreateVoteDto {
   postId: number;
   voteOptionId: number;
 }
 
-type PostVoteOption = VoteOption & { userVotes: { userId: number }[] };
+export type PostVoteOption = VoteOption & { userVotes: { userId: number }[] };
 
-interface PostVote {
+export interface PostVote {
   id: number;
   title: string;
   options: PostVoteOption[];
 }
-interface Comment {
+export interface Comment {
   id: number;
   content: string;
   createdAt: string;
@@ -61,11 +61,11 @@ interface Comment {
   isDeleted: boolean;
 }
 
-interface PostComment extends Comment {
+export interface PostComment extends Comment {
   replies: Comment[];
 }
 
-interface Post {
+export interface Post {
   id: number;
   userId: number;
   title: string;
@@ -81,16 +81,3 @@ interface Post {
   votes?: PostVote[];
   comments?: PostComment[];
 }
-
-export type {
-  Comment,
-  CreateCommentDto,
-  CreatePostDto,
-  CreateVoteDto,
-  ImageUri,
-  Post,
-  PostVote,
-  PostVoteOption,
-  Profile,
-  VoteOption,
-};
