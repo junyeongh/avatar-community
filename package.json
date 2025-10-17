@@ -1,0 +1,22 @@
+{
+  "name": "avatar-community",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:app": "pnpm --filter avatar-community-app-inflearn start",
+    "dev:server": "pnpm --filter avatar-community-server-inflearn start",
+    "dev": "pnpm -r --parallel start",
+    "format": "pnpm --parallel format",
+    "lint": "pnpm --parallel lint",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.18.2",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2"
+  }
+}
