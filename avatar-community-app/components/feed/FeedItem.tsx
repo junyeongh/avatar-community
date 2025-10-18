@@ -8,7 +8,7 @@ import Profile from "@/components/ui/Profile";
 import VoteItem from "@/components/vote/VoteItem";
 import { colors } from "@/constants";
 import { useAuth } from "@/hooks/queries/useAuth";
-import { useDeletePost } from "@/hooks/queries/usePost";
+import { useDeletePost, useLikePost } from "@/hooks/queries/usePost";
 import { Post } from "@/types";
 
 interface FeedItemProps {
@@ -26,6 +26,8 @@ export default function FeedItem({
 
   const { showActionSheetWithOptions } = useActionSheet();
   const deletePost = useDeletePost();
+
+  const likePost = useLikePost();
 
   const handlePressOption = () => {
     const options = ["Delete", "Edit", "Cancel"]; // 0: "Delete", 1: "Edit", 2: "Cancel"
@@ -54,6 +56,20 @@ export default function FeedItem({
         }
       },
     );
+  };
+
+  const handlePressLike = () => {
+    if (!auth.id) {
+      router.push("/auth");
+      return;
+    }
+    // I think it's better to allow pressing like button,
+    // even when the post is nto detail view
+    // if (!isDetailView) {
+    //   router.push({ pathname: "/post/[id]", params: { id: post.id } });
+    // }
+
+    likePost.mutate(post.id);
   };
 
   const handlePressFeed = () => {
@@ -117,7 +133,7 @@ export default function FeedItem({
       {/* menu container */}
       <View style={[styles.menuContainer]}>
         {/* Like */}
-        <Pressable style={styles.menu}>
+        <Pressable style={styles.menu} onPress={handlePressLike}>
           <Ionicons
             name={isLiked ? "heart-sharp" : "heart-outline"}
             size={16}
@@ -128,12 +144,12 @@ export default function FeedItem({
           </Text>
         </Pressable>
         {/* Comment */}
-        <Pressable style={styles.menu}>
+        <Pressable style={styles.menu} onPress={handlePressFeed}>
           <Octicons name='comment' size={16} color={colors.BLACK} />
           <Text style={styles.menuText}>{post.commentCount || "Comment"}</Text>
         </Pressable>
         {/* View */}
-        <Pressable style={styles.menu}>
+        <Pressable style={styles.menu} onPress={handlePressFeed}>
           <Ionicons name='eye-outline' size={16} color={colors.BLACK} />
           <Text style={styles.menuText}>{post.viewCount}</Text>
         </Pressable>

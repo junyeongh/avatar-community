@@ -7,6 +7,7 @@ import {
   deletePost,
   getPost,
   getPosts,
+  likePost,
   updatePost,
 } from "@/api/post";
 import { queryClient } from "@/api/queryClient";
@@ -76,6 +77,20 @@ export function useCreateVote() {
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [queryKeys.POST, queryKeys.GET_POST, data.postId],
+      });
+    },
+  });
+}
+
+export function useLikePost() {
+  return useMutation({
+    mutationFn: likePost,
+    onSuccess: (postId) => {
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.POST, queryKeys.GET_POSTS],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.POST, queryKeys.GET_POST, postId],
       });
     },
   });

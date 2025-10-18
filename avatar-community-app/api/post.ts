@@ -51,3 +51,9 @@ export async function createVote({
 
   return data;
 }
+
+export async function likePost(postId: number): Promise<number> {
+  const { data } = await axiosInstance.post(`/likes/${postId}`);
+
+  return data;
+}
