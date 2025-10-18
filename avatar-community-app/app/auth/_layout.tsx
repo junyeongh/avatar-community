@@ -7,6 +7,7 @@ export default function AuthLayout() {
   return (
     <Stack
       screenOptions={{
+        headerShown: true,
         contentStyle: {
           backgroundColor: colors.WHITE,
         },
@@ -16,7 +17,6 @@ export default function AuthLayout() {
         name='index'
         options={{
           title: "Log in",
-          headerShown: true,
           headerLeft: () => (
             <Link href={"/"} replace style={{ paddingRight: 12 }}>
               <Foundation name='home' size={28} color='black' />
@@ -28,7 +28,6 @@ export default function AuthLayout() {
         name='signin'
         options={{
           title: "Sign in with E-mail",
-          headerShown: true,
           headerBackButtonDisplayMode: "minimal",
         }}
       />
@@ -36,7 +35,6 @@ export default function AuthLayout() {
         name='signup'
         options={{
           title: "Sign up with E-mail",
-          headerShown: true,
           headerBackButtonDisplayMode: "minimal",
         }}
       />

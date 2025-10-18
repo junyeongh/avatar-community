@@ -7,6 +7,7 @@ export default function MyScreen() {
   return (
     <AuthRoute>
       <SafeAreaView>
+        {/* <SafeAreaView edges={["right", "bottom", "left"]}> */}
         <Text>My information screen</Text>
       </SafeAreaView>
     </AuthRoute>

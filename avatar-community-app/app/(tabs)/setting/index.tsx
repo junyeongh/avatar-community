@@ -10,6 +10,7 @@ export default function SettingScreen() {
   return (
     <AuthRoute>
       <SafeAreaView>
+        {/* <SafeAreaView edges={["right", "bottom", "left"]}> */}
         <Text onPress={logout}>Log out</Text>
       </SafeAreaView>
     </AuthRoute>

@@ -16,7 +16,6 @@ export default function SettingLayout() {
       <Stack.Screen
         name='index'
         options={{
-          headerShown: false,
           title: "My setting",
         }}
       />

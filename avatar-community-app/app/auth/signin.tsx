@@ -29,7 +29,6 @@ export default function SignInScreen() {
   });
 
   const onSubmit: SubmitHandler<SigninFormValues> = (formValues) => {
-    console.log("formValues", formValues);
     const { email, password } = formValues;
     signinMutation.mutate({ email, password });
   };
