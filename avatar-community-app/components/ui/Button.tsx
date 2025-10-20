@@ -1,33 +1,44 @@
-import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
+import {
+  Pressable,
+  PressableProps,
+  StyleProp,
+  StyleSheet,
+  Text,
+  ViewStyle,
+} from "react-native";
 
 import { colors } from "@/constants";
 
 interface CustomButtonProps extends PressableProps {
   label: string;
   size?: "large" | "medium";
-  variant?: "standard" | "filled";
+  variant?: "standard" | "filled" | "outlined";
+  style?: StyleProp<ViewStyle>;
 }
 
 export default function Button({
   label,
   size = "large",
   variant = "filled",
+  style = null,
   ...props
 }: CustomButtonProps) {
+  const { color: variantText, ...variantPressable } = styles[variant];
+
   return (
     <Pressable
       style={({ pressed }) => [
         styles.container,
         styles[size],
-        { backgroundColor: styles[variant].backgroundColor },
+        // { backgroundColor: styles[variant].backgroundColor },
+        variantPressable,
         props.disabled && styles.disabled,
         pressed && styles.pressed,
+        style,
       ]}
       {...props}
     >
-      <Text style={[styles.text, { color: styles[variant].color }]}>
-        {label}
-      </Text>
+      <Text style={[styles.text, { color: variantText }]}>{label}</Text>
     </Pressable>
   );
 }
@@ -47,7 +58,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 44,
   },
-  medium: {},
+  medium: {
+    height: 36,
+    alignSelf: "center",
+    paddingHorizontal: 12,
+  },
   // variant
   standard: {
     backgroundColor: undefined,
@@ -56,6 +71,12 @@ const styles = StyleSheet.create({
   filled: {
     backgroundColor: colors.ORANGE_600,
     color: colors.WHITE,
+  },
+  outlined: {
+    borderWidth: 1,
+    borderColor: colors.ORANGE_600,
+    backgroundColor: colors.WHITE,
+    color: colors.ORANGE_600,
   },
   // Pressable props
   pressed: {
