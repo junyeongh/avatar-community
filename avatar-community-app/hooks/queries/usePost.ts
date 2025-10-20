@@ -12,6 +12,7 @@ import {
 } from "@/api/post";
 import { queryClient } from "@/api/queryClient";
 import { queryKeys } from "@/constants";
+import { Post, Profile } from "@/types";
 
 export function useCreatePost() {
   return useMutation({
@@ -85,13 +86,71 @@ export function useCreateVote() {
 export function useLikePost() {
   return useMutation({
     mutationFn: likePost,
-    onSuccess: (postId) => {
+    // https://tanstack.com/query/latest/docs/framework/react/guides/optimistic-updates
+    onMutate: async (postId) => {
+      await queryClient.cancelQueries({
+        queryKey: [queryKeys.POST, queryKeys.GET_POST, postId],
+      });
+
+      const user = queryClient.getQueryData<Profile>([
+        queryKeys.AUTH,
+        queryKeys.GET_ME,
+      ]);
+      const userId = Number(user?.id);
+
+      const previousPost = queryClient.getQueryData<Post>([
+        queryKeys.POST,
+        queryKeys.GET_POST,
+        postId,
+      ]);
+      const newPost = { ...previousPost };
+      console.log("previousPost", previousPost);
+
+      const likedIndex =
+        previousPost?.likes.findIndex((like) => like.userId === userId) ?? -1;
+
+      likedIndex >= 0
+        ? newPost.likes?.splice(likedIndex, 1)
+        : newPost.likes?.push({ userId: userId });
+
+      queryClient.setQueryData(
+        [queryKeys.POST, queryKeys.GET_POST, postId],
+        newPost,
+      );
+
+      return { previousPost, newPost };
+    },
+    onError: (err, newPost, context) => {
+      queryClient.setQueryData(
+        [queryKeys.POST, queryKeys.GET_POST, context?.newPost?.id],
+        context?.previousPost,
+      );
+    },
+    // onError: (err, newPost, onMutationResult, context) => {
+    //   context.client.setQueryData(
+    //     [
+    //       queryKeys.POST,
+    //       queryKeys.GET_POST,
+    //       onMutationResult?.previousPost?.id,
+    //     ],
+    //     onMutationResult?.previousPost,
+    //   );
+    // },
+    onSettled: (data, error, variables, context) => {
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.POST, queryKeys.GET_POST, variables],
+      });
       queryClient.invalidateQueries({
         queryKey: [queryKeys.POST, queryKeys.GET_POSTS],
       });
-      queryClient.invalidateQueries({
-        queryKey: [queryKeys.POST, queryKeys.GET_POST, postId],
-      });
     },
+    // onSettled: (data, error, variables, onMutationResult, context) => {
+    //   context.client.invalidateQueries({
+    //     queryKey: [queryKeys.POST, queryKeys.GET_POST, variables],
+    //   });
+    //   context.client.invalidateQueries({
+    //     queryKey: [queryKeys.POST, queryKeys.GET_POSTS],
+    //   });
+    // },
   });
 }
