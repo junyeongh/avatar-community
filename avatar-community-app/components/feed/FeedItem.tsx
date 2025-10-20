@@ -14,11 +14,13 @@ import { Post } from "@/types";
 interface FeedItemProps {
   post: Post;
   isDetailView?: boolean;
+  focusKeyboard?: () => void;
 }
 
 export default function FeedItem({
   post,
   isDetailView = false,
+  focusKeyboard = () => {},
 }: FeedItemProps) {
   const { auth } = useAuth();
   const likedUsers = post.likes?.map((like) => Number(like.userId));
@@ -58,6 +60,15 @@ export default function FeedItem({
     );
   };
 
+  const handlePressFeed = () => {
+    if (!isDetailView) {
+      router.push({
+        pathname: "/post/[id]",
+        params: { id: post.id },
+      });
+    }
+  };
+
   const handlePressLike = () => {
     if (!auth.id) {
       router.push("/auth");
@@ -72,13 +83,14 @@ export default function FeedItem({
     likePost.mutate(post.id);
   };
 
-  const handlePressFeed = () => {
+  const handlePressComment = () => {
     if (!isDetailView) {
       router.push({
         pathname: "/post/[id]",
         params: { id: post.id },
       });
     }
+    focusKeyboard();
   };
 
   const ContainerComponent = isDetailView ? View : Pressable;
@@ -144,12 +156,12 @@ export default function FeedItem({
           </Text>
         </Pressable>
         {/* Comment */}
-        <Pressable style={styles.menu} onPress={handlePressFeed}>
+        <Pressable style={styles.menu} onPress={handlePressComment}>
           <Octicons name='comment' size={16} color={colors.BLACK} />
           <Text style={styles.menuText}>{post.commentCount || "Comment"}</Text>
         </Pressable>
-        {/* View */}
-        <Pressable style={styles.menu} onPress={handlePressFeed}>
+        {/* View Count */}
+        <Pressable style={styles.menu}>
           <Ionicons name='eye-outline' size={16} color={colors.BLACK} />
           <Text style={styles.menuText}>{post.viewCount}</Text>
         </Pressable>
@@ -168,7 +180,7 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     flexDirection: "row",
-    alignContent: "center",
+    alignItems: "center",
     justifyContent: "space-around",
     borderTopColor: colors.GRAY_300,
     borderTopWidth: StyleSheet.hairlineWidth,
@@ -188,7 +200,7 @@ const styles = StyleSheet.create({
   // menu container
   menu: {
     flexDirection: "row",
-    alignContent: "center",
+    alignItems: "center",
     justifyContent: "center",
     paddingVertical: 16,
     width: "33%",
@@ -205,7 +217,7 @@ const styles = StyleSheet.create({
   // vote
   voteContainer: {
     flexDirection: "row",
-    alignContent: "center",
+    alignItems: "center",
     marginVertical: 14,
     gap: 8,
     paddingVertical: 10,

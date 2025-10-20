@@ -35,9 +35,13 @@ export default function PostDetailViewScreen() {
 
   if (isPending || isError) return <></>;
 
+  const focusKeyboard = () => {
+    inputRef.current?.focus();
+  };
+
   const handleReply = (commentId: number) => {
     setParentCommentId(commentId);
-    inputRef.current?.focus();
+    focusKeyboard();
   };
   const handleCancelReply = () => {
     setParentCommentId(null);
@@ -76,7 +80,11 @@ export default function PostDetailViewScreen() {
             contentContainerStyle={styles.scrollViewContentContainer}
           >
             <View style={{ marginVertical: 12 }}>
-              <FeedItem post={post} isDetailView={true} />
+              <FeedItem
+                post={post}
+                isDetailView={true}
+                focusKeyboard={focusKeyboard}
+              />
             </View>
             <Text style={styles.commentCount}>
               {post.commentCount} Comment{post.commentCount !== 1 ? "s" : ""}
