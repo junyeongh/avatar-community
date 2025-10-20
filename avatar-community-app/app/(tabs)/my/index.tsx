@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
+import PagerView from "react-native-pager-view";
 
 import { baseUrl } from "@/api/axios";
+import LikedFeedList from "@/components/feed/LikedFeedList";
+import MyFeedList from "@/components/feed/MyFeedList";
 import AuthRoute from "@/components/hoc/AuthRoute";
 import Button from "@/components/ui/Button";
 import Tab from "@/components/ui/Tab";
@@ -11,7 +14,10 @@ import { useAuth } from "@/hooks/queries/useAuth";
 export default function MyScreen() {
   const [currentTab, setCurrentTab] = useState(0);
 
+  const pagerViewRef = useRef<PagerView>(null);
+
   const handlePressTab = (index: number) => {
+    pagerViewRef.current?.setPage(index);
     setCurrentTab(index);
   };
 
@@ -45,12 +51,21 @@ export default function MyScreen() {
       </View>
       <View style={styles.tabContainer}>
         <Tab isActive={currentTab === 0} onPress={() => handlePressTab(0)}>
-          Posts
+          My Posts
         </Tab>
         <Tab isActive={currentTab === 1} onPress={() => handlePressTab(1)}>
           Liked Posts
         </Tab>
       </View>
+      <PagerView
+        ref={pagerViewRef}
+        initialPage={0}
+        style={{ flex: 1 }}
+        onPageSelected={(e) => setCurrentTab(e.nativeEvent.position)}
+      >
+        <MyFeedList key='1' />
+        <LikedFeedList key='2' />
+      </PagerView>
     </AuthRoute>
   );
 }

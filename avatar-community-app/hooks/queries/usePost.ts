@@ -5,6 +5,8 @@ import {
   createPost,
   createVote,
   deletePost,
+  getLikedPosts,
+  getMyPosts,
   getPost,
   getPosts,
   likePost,
@@ -38,6 +40,30 @@ export function useGetInfinitePosts() {
   return useInfiniteQuery({
     queryFn: ({ pageParam }) => getPosts(pageParam),
     queryKey: [queryKeys.POST, queryKeys.GET_POSTS],
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      const lastPost = lastPage[lastPage.length - 1];
+      return lastPost ? allPages.length + 1 : undefined;
+    },
+  });
+}
+
+export function useGetInfiniteMyPosts() {
+  return useInfiniteQuery({
+    queryFn: ({ pageParam }) => getMyPosts(pageParam),
+    queryKey: [queryKeys.POST, queryKeys.GET_POSTS, queryKeys.GET_MY_POSTS],
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      const lastPost = lastPage[lastPage.length - 1];
+      return lastPost ? allPages.length + 1 : undefined;
+    },
+  });
+}
+
+export function useGetInfiniteLikedPosts() {
+  return useInfiniteQuery({
+    queryFn: ({ pageParam }) => getLikedPosts(pageParam),
+    queryKey: [queryKeys.POST, queryKeys.GET_POSTS, queryKeys.GET_LIKED_POSTS],
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const lastPost = lastPage[lastPage.length - 1];

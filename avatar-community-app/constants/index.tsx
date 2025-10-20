@@ -42,4 +42,6 @@ export const queryKeys = {
   POST: "post",
   GET_POST: "getPost",
   GET_POSTS: "getPosts",
+  GET_MY_POSTS: "getMyPosts",
+  GET_LIKED_POSTS: "getLikedPosts",
 };

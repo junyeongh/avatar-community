@@ -1,18 +1,18 @@
 import { useScrollToTop } from "@react-navigation/native";
-import { useRef, useState } from "react";
+import { Ref, useRef, useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 
 import FeedItem from "@/components/feed/FeedItem";
 import { colors } from "@/constants";
-import { useGetInfinitePosts } from "@/hooks/queries/usePost";
+import { useGetInfiniteLikedPosts } from "@/hooks/queries/usePost";
 
-interface FeedListProps {}
+interface LikedFeedListProps {}
 
-export default function FeedList({}: FeedListProps) {
+export default function LikedFeedList({}: LikedFeedListProps) {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
-    useGetInfinitePosts();
+    useGetInfiniteLikedPosts();
 
   const flatListRef = useRef<FlatList | null>(null);
   useScrollToTop(flatListRef);
