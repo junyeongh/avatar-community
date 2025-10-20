@@ -1,14 +1,16 @@
 import { useScrollToTop } from "@react-navigation/native";
-import { Ref, useRef, useState } from "react";
+import { Ref, useImperativeHandle, useRef, useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 
 import FeedItem from "@/components/feed/FeedItem";
 import { colors } from "@/constants";
 import { useGetInfiniteMyPosts } from "@/hooks/queries/usePost";
 
-interface MyFeedListProps {}
+interface MyFeedListProps {
+  ref?: Ref<FlatList>;
+}
 
-export default function MyFeedList({}: MyFeedListProps) {
+export default function MyFeedList({ ref }: MyFeedListProps) {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
@@ -16,6 +18,8 @@ export default function MyFeedList({}: MyFeedListProps) {
 
   const flatListRef = useRef<FlatList | null>(null);
   useScrollToTop(flatListRef);
+
+  useImperativeHandle(ref, () => flatListRef.current!, []);
 
   const handleEndReached = () => {
     if (hasNextPage && !isFetchingNextPage) fetchNextPage();

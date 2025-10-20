@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import PagerView from "react-native-pager-view";
 
 import { baseUrl } from "@/api/axios";
@@ -15,10 +15,22 @@ export default function MyScreen() {
   const [currentTab, setCurrentTab] = useState(0);
 
   const pagerViewRef = useRef<PagerView>(null);
+  const myFeedListRef = useRef<FlatList>(null);
+  const likedFeedListRef = useRef<FlatList>(null);
 
   const handlePressTab = (index: number) => {
     pagerViewRef.current?.setPage(index);
     setCurrentTab(index);
+
+    // Scroll to top when tab is pressed
+    switch (index) {
+      case 0:
+        myFeedListRef.current?.scrollToOffset({ offset: 0, animated: true });
+        break;
+      case 1:
+        likedFeedListRef.current?.scrollToOffset({ offset: 0, animated: true });
+        break;
+    }
   };
 
   const { auth } = useAuth();
@@ -63,8 +75,8 @@ export default function MyScreen() {
         style={{ flex: 1 }}
         onPageSelected={(e) => setCurrentTab(e.nativeEvent.position)}
       >
-        <MyFeedList key='1' />
-        <LikedFeedList key='2' />
+        <MyFeedList key='1' ref={myFeedListRef} />
+        <LikedFeedList key='2' ref={likedFeedListRef} />
       </PagerView>
     </AuthRoute>
   );
