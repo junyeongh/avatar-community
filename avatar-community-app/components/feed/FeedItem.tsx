@@ -99,7 +99,12 @@ export default function FeedItem({
     <ContainerComponent style={styles.container} onPress={handlePressFeed}>
       <View style={[styles.contenContainer]}>
         <Profile
-          onPress={() => {}}
+          onPress={() => {
+            router.push({
+              pathname: "/profile/[id]",
+              params: { id: post.author.id },
+            });
+          }}
           imageUri={post.author.imageUri}
           nickname={post.author.nickname}
           createdAt={post.createdAt}

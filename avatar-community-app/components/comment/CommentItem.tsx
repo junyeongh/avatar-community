@@ -1,5 +1,6 @@
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import InputField from "@/components/ui/InputField";
@@ -78,7 +79,14 @@ export default function CommentItem({
             comment.isDeleted ? "(deleted comment)" : comment.user.nickname
           }
           createdAt={comment.createdAt}
-          onPress={() => {}}
+          onPress={() => {
+            if (!comment.isDeleted) {
+              router.push({
+                pathname: "/profile/[id]",
+                params: { id: comment.user.id },
+              });
+            }
+          }}
           option={
             auth.id === comment.user.id &&
             !comment.isDeleted && (

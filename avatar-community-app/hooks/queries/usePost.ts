@@ -9,6 +9,7 @@ import {
   getMyPosts,
   getPost,
   getPosts,
+  getUserPosts,
   likePost,
   updatePost,
 } from "@/api/post";
@@ -52,6 +53,18 @@ export function useGetInfiniteMyPosts() {
   return useInfiniteQuery({
     queryFn: ({ pageParam }) => getMyPosts(pageParam),
     queryKey: [queryKeys.POST, queryKeys.GET_POSTS, queryKeys.GET_MY_POSTS],
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      const lastPost = lastPage[lastPage.length - 1];
+      return lastPost ? allPages.length + 1 : undefined;
+    },
+  });
+}
+
+export function useGetInfiniteUserPosts(userId: number) {
+  return useInfiniteQuery({
+    queryFn: ({ pageParam }) => getUserPosts(userId, pageParam),
+    queryKey: [queryKeys.POST, queryKeys.GET_POSTS, userId],
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const lastPost = lastPage[lastPage.length - 1];

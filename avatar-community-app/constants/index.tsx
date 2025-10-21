@@ -44,4 +44,5 @@ export const queryKeys = {
   GET_POSTS: "getPosts",
   GET_MY_POSTS: "getMyPosts",
   GET_LIKED_POSTS: "getLikedPosts",
+  GET_USER_PROFILE: "getUserProfile",
 };

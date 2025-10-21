@@ -45,6 +45,7 @@ function RootNavigator() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name='(tabs)' />
         <Stack.Screen name='auth' />
+        <Stack.Screen name='profile' />
         <Stack.Screen name='post' />
         <Stack.Screen name='image' />
         <Stack.Screen
