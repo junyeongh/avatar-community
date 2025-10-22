@@ -51,7 +51,7 @@ export default function ProfileScreen({}: ProfileScreenProps) {
       <View style={styles.container}>
         <View style={styles.profile}>
           <Text style={styles.nickname}>{nickname}</Text>
-          <Text style={styles.introduce}>{introduce || "Hello"}</Text>
+          <Text style={styles.introduce}>{introduce}</Text>
         </View>
       </View>
       <View style={styles.tabContainer}>

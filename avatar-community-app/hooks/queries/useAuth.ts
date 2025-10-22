@@ -2,7 +2,13 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useEffect } from "react";
 
-import { getMe, getUserProfile, postSignin, postSignup } from "@/api/auth";
+import {
+  editProfile,
+  getMe,
+  getUserProfile,
+  postSignin,
+  postSignup,
+} from "@/api/auth";
 import { queryClient } from "@/api/queryClient";
 import { queryKeys } from "@/constants";
 import { removeHeader, setHeader } from "@/utils/header";
@@ -59,10 +65,27 @@ function useSignup() {
   });
 }
 
+export function useGetUserProfile(id: number) {
+  return useQuery({
+    queryFn: () => getUserProfile(id),
+    queryKey: [queryKeys.AUTH, queryKeys.GET_USER_PROFILE, id],
+  });
+}
+
+function useUpdateProfile() {
+  return useMutation({
+    mutationFn: editProfile,
+    onSuccess: (newProfile) => {
+      queryClient.setQueryData([queryKeys.AUTH, queryKeys.GET_ME], newProfile);
+    },
+  });
+}
+
 export function useAuth() {
   const { data } = useGetMe();
   const signinMutation = useSignin();
   const signupMutation = useSignup();
+  const profileMutation = useUpdateProfile();
 
   const logout = () => {
     removeHeader("Authorization");
@@ -79,13 +102,7 @@ export function useAuth() {
     },
     signinMutation,
     signupMutation,
+    profileMutation,
     logout,
   };
-}
-
-export function useGetUserProfile(id: number) {
-  return useQuery({
-    queryFn: () => getUserProfile(id),
-    queryKey: [queryKeys.AUTH, queryKeys.GET_USER_PROFILE, id],
-  });
 }

@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { useRef, useState } from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import PagerView from "react-native-pager-view";
@@ -53,12 +54,13 @@ export default function MyScreen() {
           variant='outlined'
           label='Edit Profile'
           style={{ position: "absolute", right: 16, bottom: 16 }}
+          onPress={() => router.push("/profile/update")}
         />
       </View>
       <View style={styles.container}>
         <View style={styles.profile}>
           <Text style={styles.nickname}>{auth.nickname}</Text>
-          <Text style={styles.introduce}>{auth.introduce || "Hello"}</Text>
+          <Text style={styles.introduce}>{auth.introduce}</Text>
         </View>
       </View>
       <View style={styles.tabContainer}>
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
     height: 154,
     borderRadius: 154,
     borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.GRAY_500,
   },
   // profile container
   container: {

@@ -31,6 +31,22 @@ export default function ProfileLayout() {
           ),
         }}
       />
+      <Stack.Screen
+        name='update'
+        options={{
+          title: "Edit Profile",
+          headerBackButtonDisplayMode: "minimal",
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <Pressable
+              onPress={() => router.back()}
+              style={{ paddingRight: 12 }}
+            >
+              <Feather name='arrow-left' size={28} color='black' />
+            </Pressable>
+          ),
+        }}
+      />
     </Stack>
   );
 }
