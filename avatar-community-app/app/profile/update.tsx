@@ -1,4 +1,4 @@
-import { router, useRouter } from "expo-router";
+import { router } from "expo-router";
 import {
   Controller,
   FormProvider,
@@ -39,6 +39,7 @@ export default function ProfileUpdateScreen({}: ProfileUpdateScreenProps) {
   const onSubmit: SubmitHandler<ProfileFormValues> = (formValues) => {
     profileMutation.mutate(formValues, {
       onSuccess: () => {
+        router.back();
         Toast.show({
           type: "success",
           text1: "Saved",
