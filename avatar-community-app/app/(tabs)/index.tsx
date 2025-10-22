@@ -15,7 +15,7 @@ export default function HomeScreen() {
       <FeedList />
       {auth.id && (
         <Pressable
-          style={styles.buttonWrite}
+          style={styles.writePostButton}
           onPress={() => router.push("/post/write")}
         >
           <Ionicons name='pencil' size={32} color={colors.WHITE} />
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.WHITE,
   },
-  buttonWrite: {
+  writePostButton: {
     position: "absolute",
     bottom: 16,
     right: 16,

@@ -159,37 +159,23 @@ export function useLikePost() {
 
       return { previousPost, newPost };
     },
-    onError: (err, newPost, context) => {
-      queryClient.setQueryData(
-        [queryKeys.POST, queryKeys.GET_POST, context?.newPost?.id],
-        context?.previousPost,
+    onError: (err, newPost, onMutationResult, context) => {
+      context.client.setQueryData(
+        [
+          queryKeys.POST,
+          queryKeys.GET_POST,
+          onMutationResult?.previousPost?.id,
+        ],
+        onMutationResult?.previousPost,
       );
     },
-    // onError: (err, newPost, onMutationResult, context) => {
-    //   context.client.setQueryData(
-    //     [
-    //       queryKeys.POST,
-    //       queryKeys.GET_POST,
-    //       onMutationResult?.previousPost?.id,
-    //     ],
-    //     onMutationResult?.previousPost,
-    //   );
-    // },
-    onSettled: (data, error, variables, context) => {
-      queryClient.invalidateQueries({
+    onSettled: (data, error, variables, onMutationResult, context) => {
+      context.client.invalidateQueries({
         queryKey: [queryKeys.POST, queryKeys.GET_POST, variables],
       });
-      queryClient.invalidateQueries({
+      context.client.invalidateQueries({
         queryKey: [queryKeys.POST, queryKeys.GET_POSTS],
       });
     },
-    // onSettled: (data, error, variables, onMutationResult, context) => {
-    //   context.client.invalidateQueries({
-    //     queryKey: [queryKeys.POST, queryKeys.GET_POST, variables],
-    //   });
-    //   context.client.invalidateQueries({
-    //     queryKey: [queryKeys.POST, queryKeys.GET_POSTS],
-    //   });
-    // },
   });
 }
