@@ -1,10 +1,12 @@
 import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "expo-router";
+import { router, useNavigation } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import PagerView from "react-native-pager-view";
+import { SvgUri } from "react-native-svg";
 import Toast from "react-native-toast-message";
 
+import { baseUrl } from "@/api/axios";
 import AvatarItem from "@/components/avatar/AvatarItem";
 import FixedBottomCTA from "@/components/hoc/FixedBottomCTA";
 import Tab from "@/components/ui/Tab";
@@ -34,7 +36,7 @@ export default function AvatarScreen({}: AvatarScreenProps) {
     topId: auth?.topId ?? "",
     bottomId: auth?.bottomId ?? "",
     handId: auth?.handId ?? "",
-    skinId: auth?.skinId ?? "",
+    skinId: auth?.skinId ?? "01",
   });
 
   const extractId = (item: string) => {
@@ -42,6 +44,14 @@ export default function AvatarScreen({}: AvatarScreenProps) {
     const id = (item.split("/").pop() ?? "").split(".")[0];
 
     return id;
+  };
+
+  const getAvatarItemUrl = (category: string, id?: string) => {
+    if (category === "default" || !Boolean(id)) {
+      return `${baseUrl}/default/frame.svg`;
+    }
+
+    return `${baseUrl}/items/${category}/${id}.svg`;
   };
 
   const handlePressTab = (index: number) => {
@@ -57,12 +67,14 @@ export default function AvatarScreen({}: AvatarScreenProps) {
 
   const handleSaveAvatar = () => {
     profileMutation.mutate(avatarItems, {
-      onSuccess: () =>
+      onSuccess: () => {
+        router.back();
         Toast.show({
           type: "success",
           text1: "Avatar Updated Successfully",
           text2: "Your avatar changes have been saved",
-        }),
+        });
+      },
     });
   };
 
@@ -76,6 +88,50 @@ export default function AvatarScreen({}: AvatarScreenProps) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        <View style={styles.avatarContainer}>
+          {avatarItems.hatId && (
+            <SvgUri
+              uri={getAvatarItemUrl("hats", avatarItems.hatId)}
+              style={[styles.avatar, { zIndex: 70 }]}
+            />
+          )}
+          {avatarItems.faceId && (
+            <SvgUri
+              uri={getAvatarItemUrl("faces", avatarItems.faceId)}
+              style={[styles.avatar, { zIndex: 60 }]}
+            />
+          )}
+          {avatarItems.topId && (
+            <SvgUri
+              uri={getAvatarItemUrl("tops", avatarItems.topId)}
+              style={[styles.avatar, { zIndex: 50 }]}
+            />
+          )}
+          {avatarItems.bottomId && (
+            <SvgUri
+              uri={getAvatarItemUrl("bottoms", avatarItems.bottomId)}
+              style={[styles.avatar, { zIndex: 40 }]}
+            />
+          )}
+          <SvgUri
+            uri={getAvatarItemUrl("default")}
+            style={[styles.avatar, { zIndex: 30 }]}
+          />
+          {avatarItems.skinId && (
+            <SvgUri
+              uri={getAvatarItemUrl("skins", avatarItems.skinId)}
+              style={[styles.avatar, { zIndex: 20 }]}
+            />
+          )}
+          {avatarItems.handId && (
+            <SvgUri
+              uri={getAvatarItemUrl("hands", avatarItems.handId)}
+              style={[styles.avatar, { zIndex: 10 }]}
+            />
+          )}
+        </View>
+      </View>
       <View style={styles.tabContainer}>
         {itemHeaders.map((tab, index) => {
           return (
@@ -155,6 +211,28 @@ export default function AvatarScreen({}: AvatarScreenProps) {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
+  headerContainer: {
+    alignItems: "center",
+    position: "relative",
+    backgroundColor: colors.ORANGE_200,
+    width: "100%",
+    height: 115,
+    marginBottom: 115,
+  },
+  avatarContainer: {
+    width: 229,
+    height: 229,
+    borderRadius: 229,
+    borderWidth: 1,
+    borderColor: colors.GRAY_200,
+    backgroundColor: colors.WHITE,
+    overflow: "hidden",
+  },
+  avatar: {
+    width: 229,
+    height: 229,
+    position: "absolute",
+  },
   tabContainer: { flexDirection: "row" },
   flatListContainer: {
     paddingBottom: 100,
