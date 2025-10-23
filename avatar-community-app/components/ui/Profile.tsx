@@ -3,6 +3,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { ReactNode } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
+import { baseUrl } from "@/api/axios";
 import { colors } from "@/constants";
 
 // import "dayjs/locale/ko";
@@ -31,7 +32,7 @@ export default function Profile({
         <Image
           source={
             imageUri
-              ? { uri: imageUri }
+              ? { uri: `${baseUrl}/${imageUri}` }
               : require("@/assets/images/default-avatar.png")
           }
           style={styles.avatar}
