@@ -20,8 +20,8 @@ export default function MyScreen() {
   const likedFeedListRef = useRef<FlatList>(null);
 
   const handlePressTab = (index: number) => {
-    pagerViewRef.current?.setPage(index);
     setCurrentTab(index);
+    pagerViewRef.current?.setPage(index);
 
     // Scroll to top when tab is pressed
     switch (index) {
