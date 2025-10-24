@@ -6,7 +6,7 @@
   "scripts": {
     "dev:app": "pnpm --filter avatar-community-app-inflearn start",
     "dev:server": "pnpm --filter avatar-community-server-inflearn start",
-    "dev": "pnpm -r --parallel start",
+    "dev": "pnpm --parallel start",
     "format": "pnpm --parallel format",
     "lint": "pnpm --parallel lint",
     "prepare": "husky"
