@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { z } from "zod";
+import * as z from "zod";
 
 import EmailInput from "@/components/auth/EmailInput";
 import PasswordConfirmInput from "@/components/auth/PasswordConfirmInput";

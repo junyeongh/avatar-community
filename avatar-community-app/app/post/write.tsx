@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import z from "zod";
+import * as z from "zod";
 
 import KeyboardAvoidingViewWrapper from "@/components/hoc/KeyboardAvoidingViewWrapper";
 import DescriptionInput from "@/components/post/DescriptionInput";

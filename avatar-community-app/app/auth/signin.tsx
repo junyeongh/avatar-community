@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { z } from "zod";
+import * as z from "zod";
 
 import EmailInput from "@/components/auth/EmailInput";
 import PasswordInput from "@/components/auth/PasswordInput";
@@ -21,9 +21,8 @@ type SigninFormValues = z.infer<typeof schema>;
 export default function SignInScreen() {
   const { signinMutation } = useAuth();
   const { expoPushToken } = usePushNotification();
-  console.log("expoPushToken", expoPushToken);
 
-  const signInForm = useForm<SigninFormValues>({
+  const signInForm = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
       email: "",

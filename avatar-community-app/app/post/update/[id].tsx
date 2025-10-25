@@ -3,7 +3,7 @@ import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
-import z from "zod";
+import * as z from "zod";
 
 import DescriptionInput from "@/components/post/DescriptionInput";
 import TitleInput from "@/components/post/TitleInput";
@@ -17,7 +17,7 @@ const schema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().min(5, "Description must be at least 5 characters"),
   imageUris: z.array(z.custom<ImageUri>()),
-  isVoteAttached: z.boolean,
+  isVoteAttached: z.boolean(),
 });
 
 type PostFormValues = z.infer<typeof schema>;

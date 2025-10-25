@@ -1,3 +1,4 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
 import {
   Controller,
@@ -8,7 +9,7 @@ import {
 import { Image, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
-import z from "zod";
+import * as z from "zod";
 
 import { baseUrl } from "@/api/axios";
 import FixedBottomCTA from "@/components/hoc/FixedBottomCTA";
@@ -30,6 +31,7 @@ export default function ProfileUpdateScreen({}: ProfileUpdateScreenProps) {
   const { auth, profileMutation } = useAuth();
 
   const profileForm = useForm<ProfileFormValues>({
+    resolver: zodResolver(schema),
     defaultValues: {
       nickname: auth.nickname,
       introduce: auth.introduce,
