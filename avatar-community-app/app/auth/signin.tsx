@@ -9,6 +9,7 @@ import PasswordInput from "@/components/auth/PasswordInput";
 import FixedBottomCTA from "@/components/hoc/FixedBottomCTA";
 import KeyboardAvoidingViewWrapper from "@/components/hoc/KeyboardAvoidingViewWrapper";
 import { useAuth } from "@/hooks/queries/useAuth";
+import usePushNotification from "@/hooks/usePushNotification";
 
 const schema = z.object({
   email: z.email("Please enter a valid email address"),
@@ -19,6 +20,8 @@ type SigninFormValues = z.infer<typeof schema>;
 
 export default function SignInScreen() {
   const { signinMutation } = useAuth();
+  const { expoPushToken } = usePushNotification();
+  console.log("expoPushToken", expoPushToken);
 
   const signInForm = useForm<SigninFormValues>({
     resolver: zodResolver(schema),
@@ -29,8 +32,7 @@ export default function SignInScreen() {
   });
 
   const onSubmit: SubmitHandler<SigninFormValues> = (formValues) => {
-    const { email, password } = formValues;
-    signinMutation.mutate({ email, password });
+    signinMutation.mutate({ ...formValues, expoPushToken });
   };
 
   const handleSubmitEditing = signInForm.handleSubmit(onSubmit);

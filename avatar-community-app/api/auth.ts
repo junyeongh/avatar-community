@@ -14,7 +14,7 @@ export async function postSignup(body: UserRequestBody): Promise<void> {
 }
 
 export async function postSignin(
-  body: UserRequestBody,
+  body: UserRequestBody & { expoPushToken?: string },
 ): Promise<{ accessToken: string }> {
   const { data } = await axiosInstance.post("/auth/signin", body);
   return data;
