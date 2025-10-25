@@ -15,6 +15,10 @@ export interface CreatePostDto {
   voteOptions?: VoteOption[];
 }
 
+export interface PostLike {
+  userId: number;
+}
+
 export interface Post {
   id: number;
   userId: number;
@@ -23,7 +27,7 @@ export interface Post {
   createdAt: string;
   author: User;
   imageUris: ImageUri[];
-  likes: { userId: number }[];
+  likes: PostLike[];
   hasVote: boolean;
   voteCount: number;
   commentCount: number;

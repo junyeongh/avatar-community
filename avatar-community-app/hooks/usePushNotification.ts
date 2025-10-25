@@ -45,6 +45,7 @@ function usePushNotification() {
         Constants?.easConfig?.projectId;
       if (!projectId) {
         handleRegistrationError("Project ID not found.");
+        return;
       }
       try {
         const pushTokenString = (
@@ -80,6 +81,8 @@ function usePushNotification() {
       // prettier-ignore
       // Notifications.removeNotificationSubscription(notificationListener.current);
       // Notifications.removeNotificationSubscription(responseListener.current);
+      notificationListener.current?.remove()
+      responseListener.current?.remove();
     };
   }, []);
 

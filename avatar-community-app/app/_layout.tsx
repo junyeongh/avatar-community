@@ -11,6 +11,7 @@ import Toast from "react-native-toast-message";
 
 import { queryClient } from "@/api/queryClient";
 import { useAuth } from "@/hooks/queries/useAuth";
+import useNotificationObserver from "@/hooks/useNotificationObserver";
 
 export const unstable_settings = {
   anchor: "(tabs)",
@@ -40,6 +41,7 @@ export default function RootLayout() {
 
 function RootNavigator() {
   const { auth } = useAuth();
+  useNotificationObserver();
 
   useEffect(() => {
     auth.id &&
