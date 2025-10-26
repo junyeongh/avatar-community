@@ -2,8 +2,8 @@ import axios from "axios";
 import { Platform } from "react-native";
 
 const baseUrls = {
-  android: "http://100.73.86.16:3030", // tailscale
-  // android: "http://192.168.8.204:3030", // local ip
+  // android: "http://100.73.86.16:3030", // tailscale
+  android: "http://192.168.8.204:3030", // local ip
   ios: "http://localhost:3030",
 };
 

@@ -10,6 +10,7 @@ type UserRequestBody = {
 
 export async function postSignup(body: UserRequestBody): Promise<void> {
   const { data } = await axiosInstance.post("/auth/signup", body);
+
   return data;
 }
 
@@ -17,6 +18,7 @@ export async function postSignin(
   body: UserRequestBody & { expoPushToken?: string },
 ): Promise<{ accessToken: string }> {
   const { data } = await axiosInstance.post("/auth/signin", body);
+
   return data;
 }
 
