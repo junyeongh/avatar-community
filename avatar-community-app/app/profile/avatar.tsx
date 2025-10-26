@@ -3,6 +3,7 @@ import { router, useNavigation } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import PagerView from "react-native-pager-view";
+import Animated, { useAnimatedRef } from "react-native-reanimated";
 import { SvgUri } from "react-native-svg";
 import Toast from "react-native-toast-message";
 
@@ -27,9 +28,12 @@ export default function AvatarScreen({}: AvatarScreenProps) {
 
   const pagerViewRef = useRef<PagerView>(null);
   const items = [hats, faces, tops, bottoms, hands, skins];
-  const itemRefs = items.map((_) => useRef<FlatList>(null));
+  const itemRefs = items.map((_) => useAnimatedRef<Animated.FlatList>());
 
   const [currentTab, setCurrentTab] = useState(0);
+  const [scrollOffsets, setScrollOffsets] = useState<number[]>(
+    new Array(items.length).fill(0),
+  );
   const [avatarItems, setAvatarItems] = useState({
     hatId: auth?.hatId ?? "",
     faceId: auth?.faceId ?? "",
@@ -75,6 +79,15 @@ export default function AvatarScreen({}: AvatarScreenProps) {
           text2: "Your avatar changes have been saved",
         });
       },
+    });
+  };
+
+  const SCROLL_THRESHOLD = 200;
+  const handleScroll = (index: number, offset: number) => {
+    setScrollOffsets((prev) => {
+      const newOffsets = [...prev];
+      newOffsets[index] = offset;
+      return newOffsets;
     });
   };
 
@@ -167,6 +180,10 @@ export default function AvatarScreen({}: AvatarScreenProps) {
                 keyExtractor={(_, index) => String(index)}
                 numColumns={3}
                 contentContainerStyle={styles.flatListContainer}
+                onScroll={(e) =>
+                  handleScroll(index, e.nativeEvent.contentOffset.y)
+                }
+                scrollEventThrottle={16}
                 renderItem={({ item: uri }) => (
                   <AvatarItem
                     uri={uri}
@@ -175,10 +192,10 @@ export default function AvatarScreen({}: AvatarScreenProps) {
                   />
                 )}
               />
-              {currentTab === index && (
+              {scrollOffsets[index] > SCROLL_THRESHOLD && (
                 <Pressable
                   onPress={() => {
-                    itemRefs[index].current?.scrollToOffset({ offset: 0 });
+                    itemRefs[currentTab].current?.scrollToOffset({ offset: 0 });
                   }}
                   style={{
                     position: "absolute",
