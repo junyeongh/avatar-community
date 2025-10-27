@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useEffect } from "react";
+import Toast from "react-native-toast-message";
 
 import {
   editProfile,
@@ -11,6 +12,7 @@ import {
 } from "@/api/auth";
 import { queryClient } from "@/api/queryClient";
 import { queryKeys } from "@/constants";
+import { ResponseError } from "@/types/axios";
 import { removeHeader, setHeader } from "@/utils/header";
 import {
   deleteSecureStore,
@@ -53,7 +55,12 @@ function useSignin() {
       queryClient.fetchQuery({ queryKey: [queryKeys.AUTH, queryKeys.GET_ME] });
       router.replace("/");
     },
-    onError: () => {},
+    onError: (error: ResponseError) => {
+      Toast.show({
+        type: "error",
+        text1: error.response?.data.message,
+      });
+    },
   });
 }
 
@@ -61,7 +68,12 @@ function useSignup() {
   return useMutation({
     mutationFn: postSignup,
     onSuccess: () => router.replace("/auth/signin"),
-    onError: () => {},
+    onError: (error: ResponseError) => {
+      Toast.show({
+        type: "error",
+        text1: error.response?.data.message,
+      });
+    },
   });
 }
 
