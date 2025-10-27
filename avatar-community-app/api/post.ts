@@ -38,6 +38,15 @@ export async function getLikedPosts(page = 1): Promise<Post[]> {
   return data;
 }
 
+export async function getSearchPosts(page = 1, query: string): Promise<Post[]> {
+  console.log("query", query);
+  const { data } = await axiosInstance.get(
+    `/posts/search?query=${query}&page=${page}`,
+  );
+
+  return data;
+}
+
 export async function updatePost({
   id,
   body,

@@ -45,6 +45,7 @@ export const queryKeys = {
   GET_MY_POSTS: "getMyPosts",
   GET_LIKED_POSTS: "getLikedPosts",
   GET_USER_PROFILE: "getUserProfile",
+  GET_SEARCH_POSTS: "getSearchPosts",
   // Avatar
   AVATAR: "avatar",
   HATS: "hats",

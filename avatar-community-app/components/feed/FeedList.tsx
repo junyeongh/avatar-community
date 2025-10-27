@@ -11,15 +11,16 @@ interface FeedListProps {}
 export default function FeedList({}: FeedListProps) {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
-    useGetInfinitePosts();
+  const {
+    data: posts,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    refetch,
+  } = useGetInfinitePosts();
 
   const flatListRef = useRef<FlatList | null>(null);
   useScrollToTop(flatListRef);
-
-  const handleEndReached = () => {
-    if (hasNextPage && !isFetchingNextPage) fetchNextPage();
-  };
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
@@ -27,17 +28,21 @@ export default function FeedList({}: FeedListProps) {
     setIsRefreshing(false);
   };
 
+  const handleEndReached = () => {
+    if (hasNextPage && !isFetchingNextPage) fetchNextPage();
+  };
+
   return (
     <FlatList
       ref={flatListRef}
-      data={data?.pages.flat()}
+      data={posts?.pages.flat()}
       renderItem={({ item }) => <FeedItem post={item} />}
       keyExtractor={(item) => String(item.id)}
       contentContainerStyle={styles.contentContainer}
       onEndReached={handleEndReached}
+      onRefresh={handleRefresh}
       onEndReachedThreshold={0.5}
       refreshing={isRefreshing}
-      onRefresh={handleRefresh}
     />
   );
 }

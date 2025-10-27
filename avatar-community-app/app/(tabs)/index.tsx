@@ -1,9 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { Pressable, StyleSheet } from "react-native";
+import { Image, Pressable, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import FeedList from "@/components/feed/FeedList";
+import SearchInput from "@/components/search/SearchInput";
 import { colors } from "@/constants";
 import { useAuth } from "@/hooks/queries/useAuth";
 
@@ -12,6 +13,16 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.searchInputContainer}>
+        <Image
+          source={require("@/assets/images/logo.png")}
+          style={styles.logo}
+        />
+        <SearchInput
+          placeholder='Search Post Title'
+          onPress={() => router.push("/post/search")}
+        />
+      </View>
       <FeedList />
       {auth.id && (
         <Pressable
@@ -30,6 +41,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.WHITE,
   },
+  searchInputContainer: {
+    marginBottom: 8,
+    paddingHorizontal: 16,
+    gap: 8,
+    backgroundColor: colors.WHITE,
+    flexDirection: "row",
+  },
+  logo: { height: 44, width: 44 },
+  avatar: { height: 44, width: 44 },
   writePostButton: {
     position: "absolute",
     bottom: 16,

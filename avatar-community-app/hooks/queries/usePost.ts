@@ -9,6 +9,7 @@ import {
   getMyPosts,
   getPost,
   getPosts,
+  getSearchPosts,
   getUserPosts,
   likePost,
   updatePost,
@@ -78,6 +79,24 @@ export function useGetInfiniteLikedPosts() {
     queryFn: ({ pageParam }) => getLikedPosts(pageParam),
     queryKey: [queryKeys.POST, queryKeys.GET_POSTS, queryKeys.GET_LIKED_POSTS],
     initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      const lastPost = lastPage[lastPage.length - 1];
+      return lastPost ? allPages.length + 1 : undefined;
+    },
+  });
+}
+
+export function useGetInfiniteSearchPosts(query: string) {
+  return useInfiniteQuery({
+    queryFn: ({ pageParam }) => getSearchPosts(pageParam, query),
+    queryKey: [
+      queryKeys.POST,
+      queryKeys.GET_POSTS,
+      queryKeys.GET_SEARCH_POSTS,
+      query,
+    ],
+    initialPageParam: 1,
+    enabled: query.length > 0,
     getNextPageParam: (lastPage, allPages) => {
       const lastPost = lastPage[lastPage.length - 1];
       return lastPost ? allPages.length + 1 : undefined;

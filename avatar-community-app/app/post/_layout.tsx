@@ -27,6 +27,18 @@ export default function PostLayout() {
         }}
       />
       <Stack.Screen
+        name='search'
+        options={{
+          title: "Search a post",
+          headerShown: false,
+          headerLeft: () => (
+            <Link href={"/"} replace style={{ paddingRight: 12 }}>
+              <Feather name='arrow-left' size={28} color='black' />
+            </Link>
+          ),
+        }}
+      />
+      <Stack.Screen
         name='[id]'
         options={{
           title: "Edit a post",
