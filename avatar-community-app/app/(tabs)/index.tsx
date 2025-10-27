@@ -3,6 +3,7 @@ import { router } from "expo-router";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { baseUrl } from "@/api/axios";
 import FeedList from "@/components/feed/FeedList";
 import SearchInput from "@/components/search/SearchInput";
 import { colors } from "@/constants";
@@ -14,10 +15,21 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.searchInputContainer}>
-        <Image
-          source={require("@/assets/images/logo.png")}
-          style={styles.logo}
-        />
+        {auth.id ? (
+          <Image
+            source={
+              auth.imageUri
+                ? { uri: `${baseUrl}/${auth.imageUri}` }
+                : require("@/assets/images/default-avatar.png")
+            }
+            style={styles.avatar}
+          />
+        ) : (
+          <Image
+            source={require("@/assets/images/logo.png")}
+            style={styles.logo}
+          />
+        )}
         <SearchInput
           placeholder='Search Post Title'
           onPress={() => router.push("/post/search")}
