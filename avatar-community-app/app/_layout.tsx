@@ -50,7 +50,7 @@ function RootNavigator() {
         text1: `${auth.nickname ?? "회원"}님 환영합니다!`,
         position: "top",
       });
-  });
+  }, [auth.id]);
 
   return (
     <SafeAreaProvider>

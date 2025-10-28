@@ -13,13 +13,18 @@ export default function SettingScreen() {
   return (
     <AuthRoute>
       <SafeAreaView>
-        <View style={{ height: 30 }} /> {/* space */}
+        {/* space */}
+        <View style={{ height: 30 }} />
         <ListItem
           title='Languages'
-          onPress={logout}
+          onPress={() => {
+            // TODO: Navigate to languages screen
+            console.log("Languages pressed");
+          }}
           icon={<Entypo name='language' size={16} color={colors.BLACK} />}
         />
-        <View style={{ height: 30 }} /> {/* space */}
+        {/* space */}
+        <View style={{ height: 30 }} />
         <ListItem
           title='Sign out'
           onPress={logout}
