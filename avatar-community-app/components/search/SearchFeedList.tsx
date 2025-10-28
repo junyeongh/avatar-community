@@ -57,6 +57,7 @@ export default function SearchFeedList() {
       </View>
       <FlatList
         ref={flatListRef}
+        keyboardDismissMode='on-drag'
         data={posts?.pages.flat()}
         renderItem={({ item }) => <FeedItem post={item} />}
         keyExtractor={(item) => String(item.id)}
