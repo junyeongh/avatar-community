@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useFormContext, useWatch } from "react-hook-form";
 import { Pressable, StyleSheet } from "react-native";
 
-import InputField from "../ui/InputField";
+import InputField from "@/components/ui/InputField";
 
 export default function VoteAttached() {
   const { control, setValue, resetField } = useFormContext();
