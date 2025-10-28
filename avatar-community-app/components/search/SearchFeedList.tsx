@@ -1,8 +1,8 @@
 import { Feather } from "@expo/vector-icons";
-import { useScrollToTop } from "@react-navigation/native";
 import { router } from "expo-router";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import FeedItem from "@/components/feed/FeedItem";
 import SearchInput from "@/components/search/SearchInput";
@@ -21,9 +21,6 @@ export default function SearchFeedList() {
     isFetchingNextPage,
     refetch,
   } = useGetInfiniteSearchPosts(keywordToSubmit);
-
-  const flatListRef = useRef<FlatList | null>(null);
-  useScrollToTop(flatListRef);
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
@@ -56,12 +53,14 @@ export default function SearchFeedList() {
         />
       </View>
       <FlatList
-        ref={flatListRef}
         keyboardDismissMode='on-drag'
         data={posts?.pages.flat()}
         renderItem={({ item }) => <FeedItem post={item} />}
         keyExtractor={(item) => String(item.id)}
-        contentContainerStyle={styles.contentContainer}
+        contentContainerStyle={[
+          styles.contentContainer,
+          { paddingBottom: useSafeAreaInsets().bottom + 24 },
+        ]}
         onRefresh={handleRefresh}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.5}
@@ -81,11 +80,12 @@ const styles = StyleSheet.create({
     gap: 8,
     paddingHorizontal: 16,
     marginBottom: 8,
-    // visual properties
+    // appearance (visual properties)
     backgroundColor: colors.WHITE,
   },
   contentContainer: {
-    paddingVertical: 12,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.GRAY_200,
     backgroundColor: colors.GRAY_200,
     gap: 12,
   },

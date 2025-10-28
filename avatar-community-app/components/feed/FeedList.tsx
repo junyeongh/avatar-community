@@ -49,7 +49,9 @@ export default function FeedList({}: FeedListProps) {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    paddingVertical: 12,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.GRAY_200,
+    paddingBottom: 12,
     backgroundColor: colors.GRAY_200,
     gap: 12,
   },

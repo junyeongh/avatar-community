@@ -197,23 +197,9 @@ export default function AvatarScreen({}: AvatarScreenProps) {
                   onPress={() => {
                     itemRefs[currentTab].current?.scrollToOffset({ offset: 0 });
                   }}
-                  style={{
-                    position: "absolute",
-                    bottom: 75,
-                    right: 12,
-                    width: 64,
-                    height: 64,
-                    backgroundColor: `${colors.ORANGE_100}77`,
-                    borderRadius: 32,
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
+                  style={styles.toTheTopButtom}
                 >
-                  <Feather
-                    name='chevron-up'
-                    size={36}
-                    color={colors.ORANGE_600}
-                  />
+                  <Feather name='chevron-up' size={36} color={colors.WHITE} />
                 </Pressable>
               )}
             </View>
@@ -257,4 +243,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   pagerView: { flex: 1 },
+  toTheTopButtom: {
+    // layout
+    position: "absolute",
+    bottom: 75,
+    right: 16,
+    // dimensions
+    width: 64,
+    height: 64,
+    // flexbox
+    alignItems: "center",
+    justifyContent: "center",
+    // appearance (visual properties)
+    backgroundColor: colors.ORANGE_600,
+    borderRadius: 32,
+    // effects
+    shadowColor: colors.BLACK,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    elevation: 2,
+  },
 });

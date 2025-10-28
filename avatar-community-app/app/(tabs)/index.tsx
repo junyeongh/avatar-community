@@ -16,14 +16,16 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.searchInputContainer}>
         {auth.id ? (
-          <Image
-            source={
-              auth.imageUri
-                ? { uri: `${baseUrl}/${auth.imageUri}` }
-                : require("@/assets/images/default-avatar.png")
-            }
-            style={styles.avatar}
-          />
+          <Pressable onPress={() => router.push("/(tabs)/my")}>
+            <Image
+              source={
+                auth.imageUri
+                  ? { uri: `${baseUrl}/${auth.imageUri}` }
+                  : require("@/assets/images/default-avatar.png")
+              }
+              style={styles.avatar}
+            />
+          </Pressable>
         ) : (
           <Image
             source={require("@/assets/images/logo.png")}
@@ -54,28 +56,39 @@ const styles = StyleSheet.create({
     backgroundColor: colors.WHITE,
   },
   searchInputContainer: {
+    flexDirection: "row",
+    gap: 8,
     marginBottom: 8,
     paddingHorizontal: 16,
-    gap: 8,
     backgroundColor: colors.WHITE,
-    flexDirection: "row",
   },
-  logo: { height: 44, width: 44 },
-  avatar: { height: 44, width: 44 },
+  logo: {
+    width: 44,
+    height: 44,
+  },
+  avatar: {
+    width: 44,
+    height: 44,
+  },
   writePostButton: {
+    // layout
     position: "absolute",
     bottom: 16,
     right: 16,
-    backgroundColor: colors.ORANGE_600,
+    // dimensions
     width: 64,
     height: 64,
-    borderRadius: 32,
+    // flexbox
     alignItems: "center",
     justifyContent: "center",
+    // appearance
+    backgroundColor: colors.ORANGE_600,
+    borderRadius: 32,
+    // effects
     shadowColor: colors.BLACK,
     shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 3,
     shadowOpacity: 0.5,
+    shadowRadius: 3,
     elevation: 2,
   },
 });
