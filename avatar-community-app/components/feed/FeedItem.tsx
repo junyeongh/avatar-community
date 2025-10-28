@@ -32,7 +32,12 @@ export default function FeedItem({
   const likePost = useLikePost();
 
   const handlePressOption = () => {
-    const options = ["Delete", "Edit", "Cancel"]; // 0: "Delete", 1: "Edit", 2: "Cancel"
+    // prettier-ignore
+    const options = [
+      "Delete", // 0
+      "Edit",   // 1
+      "Cancel", // 2
+    ];
     const destructiveButtonIndex = 0;
     const cancelButtonIndex = 2;
 
