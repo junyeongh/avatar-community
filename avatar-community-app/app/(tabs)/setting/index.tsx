@@ -1,5 +1,6 @@
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { Entypo, Octicons } from "@expo/vector-icons";
+import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -31,10 +32,12 @@ export default function SettingScreen() {
         switch (selectedIndex) {
           case 0: // English
             i18n.changeLanguage("en");
+            dayjs.locale("en");
             setSecureStore("language", "en");
             break;
           case 1: // Korean
             i18n.changeLanguage("ko");
+            dayjs.locale("ko");
             setSecureStore("language", "ko");
             break;
           case 2: // Cancel
@@ -52,16 +55,16 @@ export default function SettingScreen() {
         {/* space */}
         <View style={{ height: 30 }} />
         <ListItem
-          title='Languages'
+          title={t("Languages")}
           onPress={handlePressLanguage}
           icon={<Entypo name='language' size={16} color={colors.BLACK} />}
         />
         {/* space */}
         <View style={{ height: 30 }} />
         <ListItem
-          title='Sign out'
+          title={t("Sign Out")}
           onPress={logout}
-          icon={<Octicons name='sign-out' size={16} color={colors.BLACK} />}
+          icon={<Octicons name={"sign-out"} size={16} color={colors.BLACK} />}
         />
       </SafeAreaView>
     </AuthRoute>

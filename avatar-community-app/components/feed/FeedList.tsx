@@ -1,5 +1,6 @@
 import { useScrollToTop } from "@react-navigation/native";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FlatList, StyleSheet } from "react-native";
 
 import FeedItem from "@/components/feed/FeedItem";
@@ -10,6 +11,7 @@ interface FeedListProps {}
 
 export default function FeedList({}: FeedListProps) {
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const { i18n } = useTranslation();
 
   const {
     data: posts,
@@ -34,6 +36,7 @@ export default function FeedList({}: FeedListProps) {
 
   return (
     <FlatList
+      key={i18n.language}
       ref={flatListRef}
       data={posts?.pages.flat()}
       renderItem={({ item }) => <FeedItem post={item} />}

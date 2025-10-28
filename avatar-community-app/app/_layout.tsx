@@ -12,6 +12,8 @@ import Toast from "react-native-toast-message";
 
 import "react-native-reanimated";
 
+import dayjs from "dayjs";
+
 import { queryClient } from "@/api/queryClient";
 import { useAuth } from "@/hooks/queries/useAuth";
 import useNotificationObserver from "@/hooks/useNotificationObserver";
@@ -63,6 +65,7 @@ function RootNavigator() {
       if (savedLanguage) {
         i18n.changeLanguage(savedLanguage);
       }
+      dayjs.locale(savedLanguage);
     };
     loadLanguage();
   }, [i18n]);

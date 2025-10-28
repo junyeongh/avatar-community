@@ -6,7 +6,8 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { baseUrl } from "@/api/axios";
 import { colors } from "@/constants";
 
-// import "dayjs/locale/ko";
+import "dayjs/locale/en";
+import "dayjs/locale/ko";
 
 dayjs.extend(relativeTime);
 // dayjs.locale("ko");
