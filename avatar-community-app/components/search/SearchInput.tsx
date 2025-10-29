@@ -49,5 +49,6 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     paddingLeft: 8,
     color: colors.BLACK,
+    fontFamily: "Inter_600SemiBold",
   },
 });

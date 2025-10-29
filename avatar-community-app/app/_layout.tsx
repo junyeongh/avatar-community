@@ -12,6 +12,7 @@ import Toast from "react-native-toast-message";
 
 import "react-native-reanimated";
 
+import { Inter_600SemiBold, useFonts } from "@expo-google-fonts/inter";
 import dayjs from "dayjs";
 
 import { queryClient } from "@/api/queryClient";
@@ -35,6 +36,17 @@ Notifications.setNotificationHandler({
 
 export default function RootLayout() {
   useReactQueryDevTools(queryClient);
+
+  let [fontsLoaded] = useFonts({
+    // 'expo-font' & '@expo-google-fonts/inter'
+    Inter_600SemiBold,
+    // load from asset directory
+    // Pretendard: require("@/assets/fonts/Pretendard.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <ActionSheetProvider>
